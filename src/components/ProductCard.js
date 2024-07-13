@@ -1,15 +1,39 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./CartContext";
 import "../styles/client/ProductCard.css";
 
 const ProductCard = ({ product }) => {
-  const { addToCart, cartItems } = useContext(CartContext);
-  const [added, setAdded] = useState(false);
+  const { addToCart, cartItems, updateQuantity } = useContext(CartContext);
+  const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    // Find the cart item for this product, if it exists
+    const cartItem = cartItems.find((item) => item.id === product.id);
+    if (cartItem) {
+      setQuantity(cartItem.quantity);
+    } else {
+      setQuantity(0);
+    }
+  }, [cartItems, product.id]);
 
   const handleAddToCart = () => {
-    addToCart(product);
-    setAdded(true);
+    if (quantity === 0) {
+      addToCart(product);
+      setQuantity(1);
+    }
+  };
+
+  const handleIncreaseQuantity = () => {
+    updateQuantity(product, quantity + 1);
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      updateQuantity(product, quantity - 1);
+      setQuantity(quantity - 1);
+    }
   };
 
   return (
@@ -23,13 +47,17 @@ const ProductCard = ({ product }) => {
         <h3 className="product-name">{product.name}</h3>
         <p className="product-price">${product.price.toFixed(2)}</p>
       </Link>
-      <button
-        className={`add-to-cart-button ${added ? "added" : ""}`}
-        onClick={handleAddToCart}
-        disabled={added}
-      >
-        {added ? "Added" : "Add to Cart"}
-      </button>
+      {quantity === 0 ? (
+        <button className="add-to-cart-button" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
+      ) : (
+        <div className="quantity-control">
+          <button onClick={handleDecreaseQuantity}>-</button>
+          <span>{quantity}</span>
+          <button onClick={handleIncreaseQuantity}>+</button>
+        </div>
+      )}
     </div>
   );
 };
