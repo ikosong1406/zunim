@@ -1,0 +1,131 @@
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThreeCircles } from "react-loader-spinner";
+import "./App.css";
+import Colors from "./components/Colors";
+import Landing from "./pages/client/Home";
+import Header1 from "./components/Header1";
+import Footer from "./components/Footer";
+import Signup from "./pages/client/Signup";
+import Signin from "./pages/client/Signin";
+import About from "./pages/client/About";
+import Account from "./pages/client/Account";
+import Cart from "./pages/client/Cart";
+import Shop from "./pages/client/Shop";
+import Product from "./pages/client/Product";
+import Order from "./pages/client/Order";
+import Checkout from "./pages/client/Checkout";
+import CartProvider from "./components/CartContext";
+
+const App = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  const Layout1 = ({ children }) => (
+    <>
+      <Header1 />
+      {children}
+      <Footer />
+    </>
+  );
+  return (
+    <div>
+      {isLoading ? (
+        <div className="spinner-container">
+          <ThreeCircles
+            height="80"
+            width="80"
+            color={Colors.pink}
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+      ) : (
+        <div>
+          <CartProvider>
+            <Router>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Layout1>
+                      <Landing />
+                    </Layout1>
+                  }
+                />
+                <Route path="/signin" element={<Signin />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route
+                  path="/about"
+                  element={
+                    <Layout1>
+                      <About />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/account"
+                  element={
+                    <Layout1>
+                      <Account />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <Layout1>
+                      <Cart />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/shop"
+                  element={
+                    <Layout1>
+                      <Shop />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/product/:id"
+                  element={
+                    <Layout1>
+                      <Product />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <Layout1>
+                      <Checkout />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/order"
+                  element={
+                    <Layout1>
+                      <Order />
+                    </Layout1>
+                  }
+                />
+              </Routes>
+            </Router>
+          </CartProvider>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;

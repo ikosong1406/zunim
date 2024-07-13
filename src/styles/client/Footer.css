@@ -1,0 +1,149 @@
+.footerDiv1 {
+  background-color: var(--dark);
+  padding-bottom: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footerDiv2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerDiv21 {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+}
+
+.footerDiv21 span {
+  width: 2px;
+  height: 30px;
+  background-color: var(--ash);
+  align-self: center;
+}
+
+.footerDiv21 h1 {
+  align-self: center;
+  font-family: "Satisfy", cursive;
+  color: var(--pink);
+}
+
+.footerDiv21 h3 {
+  align-self: center;
+  color: var(--ash);
+  font-family: "Roboto", sans-serif;
+}
+
+.footerDiv22 {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+}
+
+.footerDiv23 {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.footerDiv24 {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  align-self: center;
+  font-size: 18px;
+  color: var(--pink);
+}
+
+hr {
+  background-color: var(--ash);
+  height: 1px;
+  width: 100%;
+}
+
+@media screen and (max-width: 925px) {
+  .footerDiv1 {
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .footerDiv2 {
+    display: block;
+    justify-content: space-between;
+  }
+
+  .footerDiv21 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .footerDiv21 span {
+    width: 1px;
+    height: 20px;
+    background-color: var(--ash);
+    align-self: center;
+  }
+
+  .footerDiv21 h1 {
+    align-self: center;
+    font-family: "Satisfy", cursive;
+    color: var(--pink);
+    font-size: 16px;
+  }
+
+  .footerDiv21 h3 {
+    align-self: center;
+    color: var(--ash);
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+  }
+
+  .footerDiv22 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .footerDiv22 h3 {
+    font-size: 13px;
+  }
+
+  .footerDiv23 {
+    display: block;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 12px;
+  }
+
+  .footerDiv23 h3 {
+    font-size: 13px;
+  }
+
+  .footerDiv231 {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .footerDiv24 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-self: center;
+    font-size: 18px;
+    color: var(--pink);
+    margin-top: 15px;
+  }
+
+  hr {
+    background-color: var(--ash);
+    height: 1px;
+    width: 100%;
+  }
+}

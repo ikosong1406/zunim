@@ -1,0 +1,30 @@
+.filter-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  padding: 10px 20px;
+  border: 1px solid var(--dark);
+  color: var(--dark);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 13px;
+}
+
+.shop {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 30px;
+  font-family: "Satisfy", cursive;
+}
+
+@media (max-width: 768px) {
+  .shop {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
