@@ -44,7 +44,7 @@ const Cart = () => {
           <p>No products in the cart.</p>
         </div>
       ) : (
-        <div style={{ padding: 20 }}>
+        <div>
           <table>
             <thead>
               <tr>
@@ -112,27 +112,30 @@ const Cart = () => {
               {/* Add more locations as needed */}
             </select>
           </div>
-          <div className="total-section">
-            <div className="delivery">
-              <p>Express Delivery</p>
-              {location && <p> ${deliveryFee.toFixed(2)}</p>}
-            </div>
-            <div className="del">
-              <p>Sub Total</p>
-              <p> ${totalWithoutDiscount.toFixed(2)}</p>
-            </div>
-            {discount > 0 && (
-              <div className="del">
-                <p>Discount</p>
-                <p> ${(totalWithoutDiscount * discount).toFixed(2)}</p>
-              </div>
-            )}
 
-            <div className="del">
-              <h3>Total</h3>
-              <h3> ${total.toFixed(2)}</h3>
+          <div style={{ paddingRight: 20, paddingLeft: 20 }}>
+            <div className="total-section">
+              <div className="delivery">
+                <p>Express Delivery</p>
+                {location && <p> ${deliveryFee.toFixed(2)}</p>}
+              </div>
+              <div className="del">
+                <p>Sub Total</p>
+                <p> ${totalWithoutDiscount.toFixed(2)}</p>
+              </div>
+              {discount > 0 && (
+                <div className="del">
+                  <p>Discount</p>
+                  <p> ${(totalWithoutDiscount * discount).toFixed(2)}</p>
+                </div>
+              )}
+
+              <div className="del">
+                <h3>Total</h3>
+                <h3> ${total.toFixed(2)}</h3>
+              </div>
+              <button onClick={handleCheckout}>Checkout</button>
             </div>
-            <button onClick={handleCheckout}>Checkout</button>
           </div>
         </div>
       )}
