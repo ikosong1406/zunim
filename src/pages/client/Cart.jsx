@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { CartContext } from "../../components/CartContext";
 import "../../styles/client/Cart.css";
 import { useNavigate } from "react-router-dom";
+import { CiTrash } from "react-icons/ci";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
@@ -52,7 +53,7 @@ const Cart = () => {
                 <th>Image</th>
                 <th>Quantity</th>
                 <th>Sub Price</th>
-                <th>Action</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -84,7 +85,10 @@ const Cart = () => {
                     ${(item.price * item.quantity).toFixed(2)}
                   </td>
                   <td data-label="Action">
-                    <button onClick={() => removeFromCart(item)}>X</button>
+                    <CiTrash
+                      onClick={() => removeFromCart(item)}
+                      style={{ fontSize: 20, color: "red" }}
+                    />
                   </td>
                 </tr>
               ))}
