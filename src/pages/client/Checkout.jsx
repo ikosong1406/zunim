@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const publicKey = "pk_test_b322ca8ac445cfa42b14c0f6968665ce26dbb284";
   const { cartItems, total, deliveryFee, discount } = location.state || {};
 
   const [contactInfo, setContactInfo] = useState({
@@ -29,18 +30,35 @@ const Checkout = () => {
     }
   };
 
-  const handlePlaceOrder = () => {
-    // Handle order placement logic here
-    navigate("/payment", {
-      state: {
-        cartItems,
-        total,
-        deliveryFee,
-        discount,
-        contactInfo,
-        shippingAddress,
+  const handlePayment = () => {
+    const handler = window.PaystackPop.setup({
+      key: publicKey,
+      email: contactInfo.email,
+      amount: (total + deliveryFee) * 100, // Paystack expects the amount in kobo
+      currency: "NGN",
+      callback: (response) => {
+        console.log(response);
+        if (response.status === "success") {
+          navigate("/order-complete", {
+            state: {
+              cartItems,
+              total,
+              deliveryFee,
+              discount,
+              contactInfo,
+              shippingAddress,
+              reference: response.reference,
+            },
+          });
+        } else {
+          alert("Payment was not successful. Please try again.");
+        }
+      },
+      onClose: () => {
+        alert("Transaction was not completed.");
       },
     });
+    handler.openIframe();
   };
 
   return (
@@ -145,7 +163,7 @@ const Checkout = () => {
             <h3>Total</h3>
             <h3> ${(total + deliveryFee).toFixed(2)}</h3>
           </div>
-          <button onClick={handlePlaceOrder}>Make Payment</button>
+          <button onClick={handlePayment}>Make Payment</button>
         </div>
       </div>
     </div>
