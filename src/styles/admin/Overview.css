@@ -1,0 +1,19 @@
+.adHomeDiv1 {
+  padding: 10px;
+}
+
+.adHomeDiv2 {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.adHomeDiv21 {
+  padding: 10px;
+  background-color: var(--dark);
+  display: flex;
+  border-radius: 10px;
+  width: 20%;
+  justify-content: space-between;
+}

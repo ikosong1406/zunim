@@ -16,6 +16,13 @@ import Product from "./pages/client/Product";
 import Order from "./pages/client/Order";
 import Checkout from "./pages/client/Checkout";
 import CartProvider from "./components/CartContext";
+import AdminLayout from "./components/AdminLayout";
+import Overview from "./pages/admin/Overview";
+import AllProduct from "./pages/admin/Allproduct";
+import Orders from "./pages/admin/Orders";
+import OrderDetails from "./pages/admin/Orderdetails";
+import AddingProduct from "./pages/admin/Addingproduct";
+import AllProductDetails from "./pages/admin/AllProductDetails";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -119,6 +126,19 @@ const App = () => {
                     </Layout1>
                   }
                 />
+
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<Overview />} />
+                  <Route path="overview" element={<Overview />} />
+                  <Route path="allProduct" element={<AllProduct />} />
+                  <Route
+                    path="allProductDetails"
+                    element={<AllProductDetails />}
+                  />
+                  <Route path="orders" element={<Orders />} />
+                  <Route path="orderDetails" element={<OrderDetails />} />
+                  <Route path="addingProduct" element={<AddingProduct />} />
+                </Route>
               </Routes>
             </Router>
           </CartProvider>

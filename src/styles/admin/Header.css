@@ -1,0 +1,19 @@
+.headerMain {
+  background: var(--dark);
+  padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+}
+
+.headerDiv3 {
+  display: flex;
+  /* align-self: center; */
+}
+
+.headerDiv3 img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  /* align-self: center; */
+}
