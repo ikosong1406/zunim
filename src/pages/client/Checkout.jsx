@@ -4,7 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const publicKey = "pk_test_b322ca8ac445cfa42b14c0f6968665ce26dbb284";
+  // const publicKey = "pk_test_b322ca8ac445cfa42b14c0f6968665ce26dbb284";
+  const publicKey = "pk_live_58b0863979a176dc2db30d095620afce8674ddc1";
   const { cartItems, total, deliveryFee, discount } = location.state || {};
 
   const [contactInfo, setContactInfo] = useState({
