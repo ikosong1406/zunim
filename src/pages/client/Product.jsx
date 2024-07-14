@@ -59,7 +59,9 @@ const Product = () => {
           <p className="product-descript">{product.description}</p>
           <p className="product-category">{product.category}</p>
           <div className="product-colors">
-            <h3 style={{ marginRight: 10 }}>Available colors: </h3>
+            <h3 style={{ marginRight: 10, fontSize: 14 }}>
+              Available colors:{" "}
+            </h3>
             {product.availableColors.map((color, index) => (
               <span
                 key={index}

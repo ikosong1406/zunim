@@ -71,12 +71,12 @@
   }
 
   .product-name {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 10px;
   }
 
   .product-price {
-    font-size: 17px;
+    font-size: 19px;
     margin-top: 25px;
   }
 
@@ -88,12 +88,13 @@
   .product-category {
     margin-top: 20px;
     color: gray;
+    font-size: 14px;
   }
   .product-about,
   .product-descript,
   .product-reviews {
     margin-bottom: 10px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .product-colors {
