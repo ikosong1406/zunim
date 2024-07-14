@@ -1,0 +1,153 @@
+.product-details {
+  padding: 20px;
+  color: var(--dark);
+  font-family: "Roboto", sans-serif;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.product-info {
+  max-width: 600px;
+}
+
+.product-name {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 18px;
+}
+
+.product-category,
+.product-about,
+.product-description,
+.product-reviews {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.product-colors {
+  margin-bottom: 20px;
+}
+
+.color {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.add-to-cart-button {
+  padding: 10px 20px;
+  background-color: var(--dark);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 925px) {
+  .product-details {
+    padding: 20px;
+  }
+
+  .product-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .product-info {
+    max-width: 600px;
+  }
+
+  .product-name {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 18px;
+    margin-top: 25px;
+  }
+
+  .product-description {
+    margin-top: 20px;
+  }
+
+  .product-category {
+    margin-top: 20px;
+    color: gray;
+  }
+  .product-about,
+  .product-description,
+  .product-reviews {
+    margin-bottom: 10px;
+  }
+
+  .product-colors {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+  }
+
+  .color {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    align-self: center;
+  }
+
+  .color:hover {
+    transform: scale(1.1);
+  }
+
+  .add-to-cart-button {
+    padding: 10px 20px;
+    background-color: var(--dark);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 30%;
+  }
+
+  .quantity-controls button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .quantity-controls span {
+    font-size: 1.2em;
+    margin: 0 10px;
+  }
+}

@@ -145,7 +145,7 @@ const Checkout = () => {
             <h3>Total</h3>
             <h3> ${(total + deliveryFee).toFixed(2)}</h3>
           </div>
-          <button onClick={handlePlaceOrder}>Place Order</button>
+          <button onClick={handlePlaceOrder}>Make Payment</button>
         </div>
       </div>
     </div>
