@@ -71,17 +71,18 @@
   }
 
   .product-name {
-    font-size: 25px;
+    font-size: 20px;
     margin-bottom: 10px;
   }
 
   .product-price {
-    font-size: 18px;
+    font-size: 17px;
     margin-top: 25px;
   }
 
   .product-description {
     margin-top: 20px;
+    font-size: 14px;
   }
 
   .product-category {
@@ -89,9 +90,10 @@
     color: gray;
   }
   .product-about,
-  .product-description,
+  .product-descript,
   .product-reviews {
     margin-bottom: 10px;
+    font-size: 12px;
   }
 
   .product-colors {

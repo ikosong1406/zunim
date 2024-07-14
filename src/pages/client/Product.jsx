@@ -56,7 +56,7 @@ const Product = () => {
           <p className="product-about">{product.about}</p>
           <h3 className="product-price">${product.price.toFixed(2)}</h3>
           <h3 className="product-description">Description</h3>
-          <p>{product.description}</p>
+          <p className="product-descript">{product.description}</p>
           <p className="product-category">{product.category}</p>
           <div className="product-colors">
             <h3 style={{ marginRight: 10 }}>Available colors: </h3>
