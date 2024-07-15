@@ -1,0 +1,32 @@
+/* src/styles/admin/AddingProduct.css */
+.adding-product {
+  padding: 20px;
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-form input,
+.product-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.toggle-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.toggle-buttons label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}

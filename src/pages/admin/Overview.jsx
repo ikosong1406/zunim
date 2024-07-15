@@ -6,6 +6,7 @@ import { FaChartLine } from "react-icons/fa6";
 import { MdOutlinePendingActions } from "react-icons/md";
 import Colors from "../../components/Colors";
 import "../../styles/admin/Overview.css";
+import SalesChart from "../../components/SalesChart";
 
 const Overview = () => {
   const [numUsers, setNumUsers] = useState(0);
@@ -79,7 +80,9 @@ const Overview = () => {
         </div>
       </div>
 
-      <div className="adHomeDiv3"></div>
+      <div className="adHomeDiv3">
+        <SalesChart />
+      </div>
     </div>
   );
 };

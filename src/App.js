@@ -132,7 +132,7 @@ const App = () => {
                   <Route path="overview" element={<Overview />} />
                   <Route path="allProduct" element={<AllProduct />} />
                   <Route
-                    path="allProductDetails"
+                    path="allProductDetails/:id"
                     element={<AllProductDetails />}
                   />
                   <Route path="orders" element={<Orders />} />
