@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "../../styles/admin/Allproduct.css";
+import Colors from "../../components/Colors";
 
 const AllProductDetails = () => {
   const { state } = useLocation();
@@ -30,76 +31,156 @@ const AllProductDetails = () => {
 
   return (
     <div className="product-details-page">
-      <h1>Product Details</h1>
-      <div className="product-details-form">
-        <input
-          type="text"
-          name="name"
-          value={productDetails.name}
-          onChange={handleChange}
-          placeholder="Product Name"
-        />
-        <input
-          type="text"
-          name="brandName"
-          value={productDetails.brandName}
-          onChange={handleChange}
-          placeholder="Brand Name"
-        />
-        <textarea
-          name="about"
-          value={productDetails.about}
-          onChange={handleChange}
-          placeholder="About"
-        ></textarea>
-        <textarea
-          name="description"
-          value={productDetails.description}
-          onChange={handleChange}
-          placeholder="Description"
-        ></textarea>
-        <input
-          type="text"
-          name="category"
-          value={productDetails.category}
-          onChange={handleChange}
-          placeholder="Category"
-        />
-        <input
-          type="number"
-          name="price"
-          value={productDetails.price}
-          onChange={handleChange}
-          placeholder="Price"
-        />
-        <input
-          type="number"
-          name="reviews"
-          value={productDetails.reviews}
-          onChange={handleChange}
-          placeholder="Reviews"
-        />
-        <div className="toggle-buttons">
-          <label>
-            Best Seller
-            <input
-              type="checkbox"
-              name="isBestSeller"
-              checked={productDetails.isBestSeller}
-              onChange={handleToggle}
-            />
-          </label>
-          <label>
-            New Arrival
-            <input
-              type="checkbox"
-              name="isNewArrival"
-              checked={productDetails.isNewArrival}
-              onChange={handleToggle}
-            />
-          </label>
+      <div className="adHomeDiv1">
+        <h1 style={{ color: Colors.ash, marginLeft: 20 }}>Product Details</h1>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          padding: 20,
+          paddingLeft: 40,
+          paddingRight: 40,
+          width: "100",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "block", width: "50%", marginTop: -10 }}>
+          <h3>Product Name</h3>
+          <input
+            type="text"
+            name="name"
+            value={productDetails.name}
+            onChange={handleChange}
+            placeholder="Product Name"
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+            }}
+          />
+          <h3>About Product</h3>
+          <input
+            name="about"
+            value={productDetails.about}
+            onChange={handleChange}
+            placeholder="About"
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+            }}
+          ></input>
+          <h3>Brand Name</h3>
+          <input
+            type="text"
+            name="brandName"
+            value={productDetails.brandName}
+            onChange={handleChange}
+            placeholder="Brand Name"
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+            }}
+          />
+          <h3>Description</h3>
+          <textarea
+            name="description"
+            value={productDetails.description}
+            onChange={handleChange}
+            placeholder="Description"
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+              backgroundColor: "transparent",
+              height: 100,
+              width: "90%",
+              padding: 10,
+            }}
+          ></textarea>
+          <h3>Category</h3>
+          <input
+            type="text"
+            name="category"
+            value={productDetails.category}
+            onChange={handleChange}
+            placeholder="Category"
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+            }}
+          />
+          <h3>Price</h3>
+          <input
+            type="number"
+            name="price"
+            value={productDetails.price}
+            onChange={handleChange}
+            placeholder="Price"
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+            }}
+          />
+          <div className="toggle-buttons" style={{ marginTop: 20 }}>
+            <label>
+              Best Seller
+              <input
+                type="checkbox"
+                name="isBestSeller"
+                checked={productDetails.isBestSeller}
+                onChange={handleToggle}
+              />
+            </label>
+            <label>
+              New Arrival
+              <input
+                type="checkbox"
+                name="isNewArrival"
+                checked={productDetails.isNewArrival}
+                onChange={handleToggle}
+              />
+            </label>
+          </div>
         </div>
-        <button onClick={handleSave}>Save</button>
+
+        <div style={{ display: "block" }}>
+          <img src={productDetails.imageUrl} style={{ marginTop: 0 }} />
+          <div
+            style={{
+              marginTop: 20,
+              display: "flex",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <button
+              onClick={handleSave}
+              style={{
+                backgroundColor: "blue",
+                border: "none",
+                color: Colors.ash,
+                borderRadius: 10,
+              }}
+            >
+              Update
+            </button>
+            <button
+              onClick={handleSave}
+              style={{
+                backgroundColor: "red",
+                border: "none",
+                color: Colors.ash,
+                borderRadius: 10,
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

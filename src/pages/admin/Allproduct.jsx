@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import products from "../../components/DummyData";
 import "../../styles/admin/Allproduct.css";
+import Colors from "../../components/Colors";
+import { FaFilter } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 
 const AllProduct = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -37,10 +40,25 @@ const AllProduct = () => {
 
   return (
     <div className="admin-products">
-      <h1>All Products</h1>
+      <div className="adHomeDiv1">
+        <h1 style={{ color: Colors.ash, marginLeft: 20 }}>All Products</h1>
+      </div>
       <div className="actions">
-        <button onClick={() => setShowFilterModal(true)}>Filter</button>
-        <button onClick={handleAddNewProduct}>Add New Product</button>
+        <div className="filter-container">
+          <h3
+            className="filter-button"
+            onClick={() => setShowFilterModal(true)}
+          >
+            <FaFilter style={{ alignSelf: "center" }} />
+            <span style={{ marginLeft: 5 }}>Filter</span>
+          </h3>
+        </div>
+        <div className="filter-container">
+          <h3 className="filter-button" onClick={handleAddNewProduct}>
+            <FaPlus style={{ alignSelf: "center" }} />
+            <span style={{ marginLeft: 5 }}>Add New Product</span>
+          </h3>
+        </div>
       </div>
       {showFilterModal && (
         <div className="filter-modal">
@@ -68,9 +86,27 @@ const AllProduct = () => {
             key={product.id}
             className="product-card"
           >
-            <h3>{product.name}</h3>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <div style={{ width: "20%" }}>
+                <img
+                  src={product.imageUrl}
+                  style={{ width: 100, marginTop: 0 }}
+                />
+              </div>
+              <div style={{ width: "70%" }}>
+                <h3>{product.name}</h3>
+                <p>{product.category}</p>
+                <p>${product.price.toFixed(2)}</p>
+              </div>
+            </div>
+            <h3>Description</h3>
             <p>{product.about}</p>
-            <p>${product.price.toFixed(2)}</p>
           </Link>
         ))}
       </div>

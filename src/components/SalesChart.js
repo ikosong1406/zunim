@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
 import salesData from "./SalesData";
+import Colors from "./Colors";
 
 const SalesChart = () => {
   const [timeframe, setTimeframe] = useState("daily");
@@ -32,10 +33,10 @@ const SalesChart = () => {
         stroke: {
           curve: "smooth",
         },
-        title: {
-          text: "Sales Overview",
-          align: "left",
-        },
+        // title: {
+        //   text: "Sales Overview",
+        //   align: "left",
+        // },
       },
       series: [
         {
@@ -48,16 +49,27 @@ const SalesChart = () => {
 
   return (
     <div>
-      <div className="sales-chart-buttons">
-        <button onClick={() => setTimeframe("daily")}>Daily</button>
-        <button onClick={() => setTimeframe("weekly")}>Weekly</button>
-        <button onClick={() => setTimeframe("monthly")}>Monthly</button>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h2 style={{ color: Colors.dark }}>Sales Graph</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "20%",
+            paddingRight: 20,
+            paddingBottom: 15,
+          }}
+        >
+          <button onClick={() => setTimeframe("daily")}>Daily</button>
+          <button onClick={() => setTimeframe("weekly")}>Weekly</button>
+          <button onClick={() => setTimeframe("monthly")}>Monthly</button>
+        </div>
       </div>
       <Chart
         options={getChartData().options}
         series={getChartData().series}
         type="line"
-        height={350}
+        height={300}
       />
     </div>
   );

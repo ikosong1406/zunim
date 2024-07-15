@@ -17,14 +17,13 @@
 
 .product-card {
   padding: 20px;
-  border: 1px solid #ccc;
-  text-align: center;
+  border: 1px solid var(--ash);
   text-decoration: none;
   color: black;
 }
 
 .product-card:hover {
-  background-color: #f9f9f9;
+  background-color: var(--ash);
 }
 
 .filter-modal {

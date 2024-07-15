@@ -1,7 +1,7 @@
 .sideDiv1 {
   background: var(--dark);
   width: 10%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   z-index: 3;
