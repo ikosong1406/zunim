@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../../styles/client/About.css";
 import { RiSecurePaymentFill } from "react-icons/ri";
@@ -37,22 +37,18 @@ const About = () => {
   return (
     <div className="aboutMain">
       <div className="aboutDiv1">
-        <h1>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-          officiis doloremque architecto, delectus dicta doloribus?
-        </h1>
-        <h3>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-          nesciunt!
-        </h3>
+        <h1>Welcome to Our Store</h1>
+        <h3>Your one-stop shop for all your lifestyle needs.</h3>
       </div>
 
       <div className="homeDiv4">
         <div className="homeDiv41"></div>
         <div className="homeDiv42">
           <h2>About Us</h2>
-          <h3>thousand of lifestyle products waiting for you</h3>
-          <Link className="cta">Shop Now</Link>
+          <h3>Thousands of lifestyle products waiting for you</h3>
+          <Link className="cta" to="/shop">
+            Shop Now
+          </Link>
         </div>
       </div>
 
@@ -63,24 +59,21 @@ const About = () => {
             <FaShippingFast className="icon" />
             <p>Address</p>
             <p style={{ textAlign: "center" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-              illum?
+              1234 Market Street, Suite 200, San Francisco, CA 94103
             </p>
           </div>
           <div className="homeDiv51">
             <RiSecurePaymentFill className="icon" />
-            <p>Contact Us </p>
+            <p>Contact Us</p>
             <p style={{ textAlign: "center" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-              illum?
+              For any inquiries, please email us at support@store.com
             </p>
           </div>
           <div className="homeDiv51">
             <FaPhone className="icon" />
             <p>Message Us</p>
             <p style={{ textAlign: "center" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
-              illum?
+              Send us a message and we'll get back to you as soon as possible.
             </p>
           </div>
         </div>
@@ -129,7 +122,7 @@ const About = () => {
               ></textarea>
             </div>
             <div className="contactDiv114">
-              <button className="flat-button"> Submit </button>
+              <button className="flat-button">Submit</button>
             </div>
           </div>
 
@@ -143,7 +136,9 @@ const About = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {/* Additional map layers or components can be added here */}
+            <Marker position={[4.804597, 6.932498]}>
+              <Popup>Our Office Location</Popup>
+            </Marker>
           </MapContainer>
         </div>
       </div>

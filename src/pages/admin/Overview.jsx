@@ -63,21 +63,6 @@ const Overview = () => {
             }}
           />
         </div>
-        <div className="adHomeDiv21">
-          <div className="adHome211">
-            <p style={{ color: "gray", fontWeight: 500 }}>Return Orders</p>
-            <h2 style={{ color: Colors.ash }}>0</h2>
-          </div>
-          <FaShoppingBag
-            style={{
-              fontSize: 30,
-              padding: 5,
-              backgroundColor: "brown",
-              color: Colors.ash,
-              borderRadius: 10,
-            }}
-          />
-        </div>
       </div>
 
       <div className="adHomeDiv3">

@@ -47,18 +47,22 @@ const Header1 = ({ clicked, setClicked }) => {
         >
           <FaSearch />
         </NavLink>
-        {/* <NavLink
-          to="/account"
-          style={{ textDecoration: "none", color: Colors.dark }}
-        >
-          <FaUser />
-        </NavLink> */}
         <NavLink
           to="/cart"
           style={{ textDecoration: "none", color: Colors.dark }}
         >
           <FaCartPlus />{" "}
-          <span style={{ color: "blueviolet" }}> ({cartItems.length})</span>
+          <span
+            style={{
+              backgroundColor: Colors.ash,
+              padding: 2.5,
+              borderRadius: 5,
+              fontWeight: "500",
+              fontSize: 14,
+            }}
+          >
+            {cartItems.length}
+          </span>
         </NavLink>
       </div>
     </div>

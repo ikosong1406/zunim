@@ -41,7 +41,8 @@ thead tr {
 }
 
 td {
-  color: whitesmoke;
+  color: var(--dark);
+  font-weight: 600;
 }
 
 button {

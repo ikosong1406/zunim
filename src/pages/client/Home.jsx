@@ -9,6 +9,7 @@ import { FaShippingFast } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import ProductCard from "../../components/ProductCard";
 import products from "../../components/DummyData";
+import Colors from "../../components/Colors";
 
 const Home = () => {
   const newArrivals = products
@@ -23,14 +24,16 @@ const Home = () => {
       <div className="homeDiv1">
         <div className="homeDiv11">
           <h1>
-            Refresh Your <span style={{ color: "blueviolet" }}>Day</span>, Every{" "}
-            <span style={{ color: "blueviolet" }}>Day</span>
+            Refresh Your <span style={{ color: Colors.ash }}>Day</span>, Every{" "}
+            <span style={{ color: Colors.ash }}>Day</span>
           </h1>
           <h3>
             Stay hydrated and energized with our premium water bottles, designed
             for a healthy and active lifestyle.
           </h3>
-          <Link className="cta">Shopping Now</Link>
+          <Link className="cta" to="/shop">
+            Shopping Now
+          </Link>
         </div>
         <div className="homeDiv12">
           <img src={bottle} alt="bottle" />
@@ -38,7 +41,12 @@ const Home = () => {
       </div>
 
       <div className="homeDiv2">
-        <h2>New Arrivals</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2>New Arrivals</h2>
+          <Link className="cta2" to="/new">
+            See All
+          </Link>
+        </div>
         <div className="homeDiv21">
           {newArrivals.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -92,7 +100,12 @@ const Home = () => {
       </div>
 
       <div className="homeDiv7">
-        <h2>Best Sellers</h2>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2>Best Sellers</h2>
+          <Link className="cta2" to="/best">
+            See All
+          </Link>
+        </div>
         <div className="homeDiv71">
           {bestSellers.map((product) => (
             <ProductCard key={product.id} product={product} />

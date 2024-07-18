@@ -1,6 +1,6 @@
 :root {
-  --pink: #edafb8;
-  --pink2: #eaccbe;
+  --pink: #6582aa;
+  --pink2: #a3c5f1;
   --ash: #ece8df;
   --dark2: #b0c4b1;
   --dark: #2e3637;
@@ -45,6 +45,18 @@
   padding: 10px;
   font-weight: 500;
   text-decoration: none;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.cta2 {
+  color: var(--dark);
+  padding: 10px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-top: 5px;
 }
 
 .homeDiv12 img {
@@ -222,6 +234,10 @@
   }
 
   .cta {
+    font-size: 12px;
+  }
+
+  .cta2 {
     font-size: 12px;
   }
 

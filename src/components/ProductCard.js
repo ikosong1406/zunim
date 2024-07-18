@@ -1,14 +1,15 @@
+// src/components/ProductCard.js
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./CartContext";
 import "../styles/client/ProductCard.css";
 
 const ProductCard = ({ product }) => {
-  const { addToCart, cartItems, updateQuantity } = useContext(CartContext);
+  const { addToCart, cartItems, updateQuantity, removeFromCart } =
+    useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    // Find the cart item for this product, if it exists
     const cartItem = cartItems.find((item) => item.id === product.id);
     if (cartItem) {
       setQuantity(cartItem.quantity);
@@ -33,6 +34,9 @@ const ProductCard = ({ product }) => {
     if (quantity > 1) {
       updateQuantity(product, quantity - 1);
       setQuantity(quantity - 1);
+    } else if (quantity === 1) {
+      removeFromCart(product);
+      setQuantity(0);
     }
   };
 

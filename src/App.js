@@ -15,6 +15,8 @@ import Shop from "./pages/client/Shop";
 import Product from "./pages/client/Product";
 import Order from "./pages/client/Order";
 import Checkout from "./pages/client/Checkout";
+import New from "./pages/client/New";
+import Best from "./pages/client/Best";
 import CartProvider from "./components/CartContext";
 import AdminLayout from "./components/AdminLayout";
 import Overview from "./pages/admin/Overview";
@@ -107,6 +109,22 @@ const App = () => {
                   element={
                     <Layout1>
                       <Product />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/new"
+                  element={
+                    <Layout1>
+                      <New />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/best"
+                  element={
+                    <Layout1>
+                      <Best />
                     </Layout1>
                   }
                 />
