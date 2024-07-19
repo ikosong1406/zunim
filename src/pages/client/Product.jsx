@@ -45,6 +45,7 @@ const Product = () => {
 
   return (
     <div className="homeMain">
+      <h1 className="shop">Product Details</h1>
       <div className="product-details">
         <div className="productImagediv">
           <img
