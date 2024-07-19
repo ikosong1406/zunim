@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { CartContext } from "../../components/CartContext";
 
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  // const publicKey = "pk_test_b322ca8ac445cfa42b14c0f6968665ce26dbb284";
+  const { clearCart } = useContext(CartContext);
   const publicKey = "pk_live_58b0863979a176dc2db30d095620afce8674ddc1";
   const { cartItems, total, deliveryFee, discount } = location.state || {};
 
@@ -20,6 +21,7 @@ const Checkout = () => {
     city: "",
     state: "",
     zipCode: "",
+    specialNote: "",
   });
 
   const handleInputChange = (e) => {
@@ -32,23 +34,34 @@ const Checkout = () => {
   };
 
   const handlePayment = () => {
+    // Check if all fields are filled
+    if (
+      !contactInfo.firstName ||
+      !contactInfo.lastName ||
+      !contactInfo.email ||
+      !contactInfo.phone ||
+      !shippingAddress.street ||
+      !shippingAddress.city ||
+      !shippingAddress.state ||
+      !shippingAddress.zipCode
+    ) {
+      alert("Please fill in all fields before proceeding to payment.");
+      return;
+    }
+
     const handler = window.PaystackPop.setup({
       key: publicKey,
       email: contactInfo.email,
-      amount: (total + deliveryFee) * 100, // Paystack expects the amount in kobo
+      amount: total * 100, // Paystack expects the amount in kobo
       currency: "NGN",
       callback: (response) => {
         console.log(response);
         if (response.status === "success") {
-          navigate("/order-complete", {
+          clearCart();
+          navigate("/order", {
             state: {
-              cartItems,
-              total,
-              deliveryFee,
-              discount,
-              contactInfo,
-              shippingAddress,
-              reference: response.reference,
+              total: total || 0, // Ensure total is a number
+              reference: response.reference || "", // Ensure reference is a string
             },
           });
         } else {
@@ -126,6 +139,13 @@ const Checkout = () => {
           onChange={handleInputChange}
           placeholder="Zip Code"
         />
+        <input
+          type="text"
+          name="specialNote"
+          value={shippingAddress.specialNote}
+          onChange={handleInputChange}
+          placeholder="Special Note"
+        />
       </div>
       <div className="checkout-section order-summary">
         <h3>Order Summary</h3>
@@ -142,7 +162,7 @@ const Checkout = () => {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
-                <td> ₦{(item.price * item.quantity).toFixed(2)}</td>
+                <td>₦{(item.price * item.quantity).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -151,18 +171,18 @@ const Checkout = () => {
         <div className="total-section">
           <div className="delivery">
             <p>Express Delivery</p>
-            <p> ₦{deliveryFee.toFixed(2)}</p>
+            <p>₦{deliveryFee.toFixed(2)}</p>
           </div>
           {discount > 0 && (
             <div className="del">
               <p>Discount</p>
-              <p> ₦{(total * discount).toFixed(2)}</p>
+              <p>₦{(total * discount).toFixed(2)}</p>
             </div>
           )}
 
           <div className="del">
             <h3>Total</h3>
-            <h3> ₦{(total + deliveryFee).toFixed(2)}</h3>
+            <h3>₦{total.toFixed(2)}</h3>
           </div>
           <button onClick={handlePayment}>Make Payment</button>
         </div>

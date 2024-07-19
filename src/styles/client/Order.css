@@ -1,0 +1,47 @@
+.order-complete-section {
+  max-width: 600px; /* Adjust the max width as needed */
+  margin: 0 auto; /* Center the section horizontally */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Optional: rounded corners */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+  background-color: var(--ash); /* Background color for the section */
+}
+
+.c1 {
+  text-align: center;
+  font-size: 18px;
+}
+
+.c2 {
+  text-align: center;
+  font-size: 20px;
+}
+
+.order-details {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.c3 {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 925px) {
+  .c1 {
+    font-size: 14px;
+  }
+
+  .c2 {
+    font-size: 16px;
+  }
+
+  .order-details {
+    width: 80%;
+  }
+
+  .c3 {
+    margin-top: 30px;
+  }
+}
