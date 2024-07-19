@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "../../styles/client/Order.css";
+import { Link } from "react-router-dom";
 
 const Order = () => {
   const location = useLocation();
@@ -36,6 +37,11 @@ const Order = () => {
             <h3>Payment Method</h3>
             <p> Paystack</p>
           </div>
+        </div>
+        <div className="c4">
+          <Link className="cta" to="/shop">
+            Continue Shopping
+          </Link>
         </div>
       </div>
     </div>

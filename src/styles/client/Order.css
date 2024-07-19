@@ -28,6 +28,12 @@
   justify-content: space-between;
 }
 
+.c4 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 925px) {
   .c1 {
     font-size: 14px;

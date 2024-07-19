@@ -7,6 +7,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { clearCart } = useContext(CartContext);
   const publicKey = "pk_live_58b0863979a176dc2db30d095620afce8674ddc1";
+  // const publicKey = "pk_test_b322ca8ac445cfa42b14c0f6968665ce26dbb284";
   const { cartItems, total, deliveryFee, discount } = location.state || {};
 
   const [contactInfo, setContactInfo] = useState({
