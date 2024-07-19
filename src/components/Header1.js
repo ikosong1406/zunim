@@ -42,7 +42,7 @@ const Header1 = ({ clicked, setClicked }) => {
 
       <div className="authLinks">
         <NavLink
-          to="/account"
+          to="/search"
           style={{ textDecoration: "none", color: Colors.dark }}
         >
           <FaSearch />

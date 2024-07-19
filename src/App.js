@@ -16,6 +16,7 @@ import Order from "./pages/client/Order";
 import Checkout from "./pages/client/Checkout";
 import New from "./pages/client/New";
 import Best from "./pages/client/Best";
+import Search from "./pages/client/Search";
 import CartProvider from "./components/CartContext";
 import AdminLayout from "./components/AdminLayout";
 import Overview from "./pages/admin/Overview";
@@ -132,6 +133,14 @@ const App = () => {
                   element={
                     <Layout1>
                       <Order />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/search"
+                  element={
+                    <Layout1>
+                      <Search />
                     </Layout1>
                   }
                 />

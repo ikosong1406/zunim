@@ -1,38 +1,48 @@
 // src/pages/admin/AllProduct.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import products from "../../components/DummyData";
+import ProductFilter from "../../components/ProductFilter";
+import Modal from "../../components/Modal";
 import "../../styles/admin/Allproduct.css";
 import Colors from "../../components/Colors";
 import { FaFilter } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 
 const AllProduct = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [showFilterModal, setShowFilterModal] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
+  const categories = [...new Set(products.map((product) => product.category))];
 
-  const filterProducts = () => {
-    if (selectedCategory === "") {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter(
-        (product) => product.category === selectedCategory
-      );
-      setFilteredProducts(filtered);
+  const handleFilter = ({ category, minPrice, maxPrice }) => {
+    let filtered = products;
+    if (category) {
+      filtered = filtered.filter((product) => product.category === category);
     }
-    setShowFilterModal(false);
+    if (minPrice) {
+      filtered = filtered.filter(
+        (product) => product.price >= parseFloat(minPrice)
+      );
+    }
+    if (maxPrice) {
+      filtered = filtered.filter(
+        (product) => product.price <= parseFloat(maxPrice)
+      );
+    }
+    setFilteredProducts(filtered);
   };
 
-  const resetFilter = () => {
-    setSelectedCategory("");
-    setFilteredProducts(products);
+  const handleFilterModal = () => {
+    setShowFilterModal(!showFilterModal);
   };
+
+  useEffect(() => {
+    // Reset filter on mount
+    setFilteredProducts(products);
+  }, []);
 
   const handleAddNewProduct = () => {
     navigate("/admin/addingProduct");
@@ -60,24 +70,6 @@ const AllProduct = () => {
           </h3>
         </div>
       </div>
-      {showFilterModal && (
-        <div className="filter-modal">
-          <h2>Filter by Category</h2>
-          <select value={selectedCategory} onChange={handleCategoryChange}>
-            <option value="">All Categories</option>
-            {Array.from(
-              new Set(products.map((product) => product.category))
-            ).map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-          <button onClick={filterProducts}>Apply Filter</button>
-          <button onClick={resetFilter}>Reset Filter</button>
-          <button onClick={() => setShowFilterModal(false)}>Close</button>
-        </div>
-      )}
       <div className="product-grid">
         {filteredProducts.map((product) => (
           <Link
@@ -99,7 +91,7 @@ const AllProduct = () => {
                   style={{ width: 100, marginTop: 0 }}
                 />
               </div>
-              <div style={{ width: "70%" }}>
+              <div style={{ width: "70%", marginLeft: 70 }}>
                 <h3>{product.name}</h3>
                 <p>{product.category}</p>
                 <p> ₦{product.price.toFixed(2)}</p>
@@ -110,6 +102,9 @@ const AllProduct = () => {
           </Link>
         ))}
       </div>
+      <Modal show={showFilterModal} onClose={handleFilterModal}>
+        <ProductFilter categories={categories} onFilter={handleFilter} />
+      </Modal>
     </div>
   );
 };

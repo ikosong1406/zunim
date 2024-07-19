@@ -1,17 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { CartContext } from "../../components/CartContext";
 import "../../styles/client/Product.css";
 import products from "../../components/DummyData";
 
 const Product = () => {
   const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+  const location = useLocation();
+  const product = location.state?.product || products.find((p) => p.id === id);
   const { addToCart, cartItems, updateQuantity } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    // Find the cart item for this product, if it exists
     const cartItem = cartItems.find((item) => item.id === product.id);
     if (cartItem) {
       setQuantity(cartItem.quantity);

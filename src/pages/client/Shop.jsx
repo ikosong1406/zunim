@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
 import products from "../../components/DummyData";
 import ProductFilter from "../../components/ProductFilter";
@@ -7,6 +8,7 @@ import "../../styles/client/Shop.css";
 import { FaFilter } from "react-icons/fa6";
 
 const Shop = () => {
+  const location = useLocation();
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [showFilterModal, setShowFilterModal] = useState(false);
 
@@ -30,20 +32,21 @@ const Shop = () => {
     setFilteredProducts(filtered);
   };
 
-  const handleFilterModal = () => {
-    setShowFilterModal(!showFilterModal);
-  };
-
   useEffect(() => {
-    // Reset filter on mount
-    setFilteredProducts(products);
-  }, []);
+    if (location.state) {
+      const { category, brand } = location.state;
+      handleFilter({ category, brand });
+    }
+  }, [location.state]);
 
   return (
     <div className="homeMain" style={{ paddingLeft: 20, paddingRight: 20 }}>
       <h1 className="shop">Shop Page</h1>
       <div className="filter-container">
-        <h3 className="filter-button" onClick={handleFilterModal}>
+        <h3
+          className="filter-button"
+          onClick={() => setShowFilterModal(!showFilterModal)}
+        >
           <FaFilter style={{ alignSelf: "center" }} />
           <span style={{ marginLeft: 5 }}>Filter</span>
         </h3>
@@ -53,7 +56,10 @@ const Shop = () => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      <Modal show={showFilterModal} onClose={handleFilterModal}>
+      <Modal
+        show={showFilterModal}
+        onClose={() => setShowFilterModal(!showFilterModal)}
+      >
         <ProductFilter categories={categories} onFilter={handleFilter} />
       </Modal>
     </div>

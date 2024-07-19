@@ -2,7 +2,7 @@ const products = [
   {
     id: "1",
     name: "Product 1",
-    category: "Category 1",
+    category: "Apparel & Footware",
     price: 10.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: true,
@@ -15,7 +15,7 @@ const products = [
   {
     id: "2",
     name: "Product 2",
-    category: "Category 2",
+    category: "Beauty & Personal Care",
     price: 20.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: false,
@@ -28,7 +28,7 @@ const products = [
   {
     id: "3",
     name: "Product 3",
-    category: "Category 1",
+    category: "Kitchen & Dinning",
     price: 15.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: true,
@@ -41,7 +41,7 @@ const products = [
   {
     id: "4",
     name: "Product 4",
-    category: "Category 4",
+    category: "Home Interiors",
     price: 10.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: true,
@@ -54,7 +54,7 @@ const products = [
   {
     id: "5",
     name: "Product 5",
-    category: "Category 5",
+    category: "Phone Accesories",
     price: 20.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: false,
@@ -67,7 +67,7 @@ const products = [
   {
     id: "6",
     name: "Product 6",
-    category: "Category 6",
+    category: "Phone Accesories",
     price: 15.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: true,
@@ -80,7 +80,7 @@ const products = [
   {
     id: "7",
     name: "Product 7",
-    category: "Category 7",
+    category: "Home Interiors",
     price: 10.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: true,
@@ -93,7 +93,7 @@ const products = [
   {
     id: "8",
     name: "Product 8",
-    category: "Category 8",
+    category: "Kitchen & Dinning",
     price: 20.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: false,
@@ -106,7 +106,7 @@ const products = [
   {
     id: "9",
     name: "Product 9",
-    category: "Category 9",
+    category: "Beauty & Personal Care",
     price: 15.99,
     imageUrl: "https://via.placeholder.com/150",
     isNewArrival: true,
