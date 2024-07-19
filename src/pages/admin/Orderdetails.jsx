@@ -228,7 +228,7 @@ const Orderdetails = () => {
               <tr key={index}>
                 <td>{product.name}</td>
                 <td>{product.quantity}</td>
-                <td>${product.subPrice.toFixed(2)}</td>
+                <td> ₦{product.subPrice.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -243,16 +243,16 @@ const Orderdetails = () => {
         }}
       >
         <p>
-          <strong>Delivery Fee:</strong> ${order.deliveryFee.toFixed(2)}
+          <strong>Delivery Fee:</strong> ₦{order.deliveryFee.toFixed(2)}
         </p>
         <p>
-          <strong>Sub Total:</strong> ${order.subTotal.toFixed(2)}
+          <strong>Sub Total:</strong> ₦{order.subTotal.toFixed(2)}
         </p>
         <p>
-          <strong>Discount:</strong> ${order.discount.toFixed(2)}
+          <strong>Discount:</strong> ₦{order.discount.toFixed(2)}
         </p>
         <p>
-          <strong>Total:</strong> ${order.total.toFixed(2)}
+          <strong>Total:</strong> ₦{order.total.toFixed(2)}
         </p>
       </div>
     </div>

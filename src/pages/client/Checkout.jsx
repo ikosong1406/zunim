@@ -142,7 +142,7 @@ const Checkout = () => {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
-                <td>${(item.price * item.quantity).toFixed(2)}</td>
+                <td> ₦{(item.price * item.quantity).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -151,18 +151,18 @@ const Checkout = () => {
         <div className="total-section">
           <div className="delivery">
             <p>Express Delivery</p>
-            <p> ${deliveryFee.toFixed(2)}</p>
+            <p> ₦{deliveryFee.toFixed(2)}</p>
           </div>
           {discount > 0 && (
             <div className="del">
               <p>Discount</p>
-              <p> ${(total * discount).toFixed(2)}</p>
+              <p> ₦{(total * discount).toFixed(2)}</p>
             </div>
           )}
 
           <div className="del">
             <h3>Total</h3>
-            <h3> ${(total + deliveryFee).toFixed(2)}</h3>
+            <h3> ₦{(total + deliveryFee).toFixed(2)}</h3>
           </div>
           <button onClick={handlePayment}>Make Payment</button>
         </div>

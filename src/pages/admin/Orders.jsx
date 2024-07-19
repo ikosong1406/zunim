@@ -45,7 +45,7 @@ const Orders = () => {
                   ></span>
                   {order.status}
                 </td>
-                <td>${order.total.toFixed(2)}</td>
+                <td> ₦{order.total.toFixed(2)}</td>
                 <td>
                   <Link
                     to={`/admin/orderDetails/${order.id}`}

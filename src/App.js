@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 import Signup from "./pages/client/Signup";
 import Signin from "./pages/client/Signin";
 import About from "./pages/client/About";
-import Account from "./pages/client/Account";
 import Cart from "./pages/client/Cart";
 import Shop from "./pages/client/Shop";
 import Product from "./pages/client/Product";
@@ -77,14 +76,6 @@ const App = () => {
                   element={
                     <Layout1>
                       <About />
-                    </Layout1>
-                  }
-                />
-                <Route
-                  path="/account"
-                  element={
-                    <Layout1>
-                      <Account />
                     </Layout1>
                   }
                 />

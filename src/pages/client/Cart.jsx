@@ -9,8 +9,8 @@ const Cart = () => {
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const [location, setLocation] = useState("");
-  const deliveryFee = 5.0; // Example delivery fee
-  const navigation = useNavigate();
+  const [deliveryFee, setDeliveryFee] = useState(0);
+  const navigate = useNavigate();
 
   const applyCoupon = () => {
     // Example coupon logic
@@ -22,17 +22,42 @@ const Cart = () => {
     }
   };
 
+  const handleLocationChange = (e) => {
+    const selectedLocation = e.target.value;
+    setLocation(selectedLocation);
+    switch (selectedLocation) {
+      case "Iwofe":
+      case "Agip":
+      case "Wimpy":
+      case "Adageorge":
+        setDeliveryFee(1500);
+        break;
+      case "Choba":
+      case "Rukpokwu":
+      case "Mile 1":
+      case "Rumola":
+        setDeliveryFee(2500);
+        break;
+      default:
+        setDeliveryFee(0);
+    }
+  };
+
   const totalWithoutDiscount = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const totalWithDiscount =
     totalWithoutDiscount - totalWithoutDiscount * discount;
-  const total = totalWithDiscount + (location ? deliveryFee : 0);
+  const total = totalWithDiscount + deliveryFee;
 
   const handleCheckout = () => {
+    if (!location) {
+      alert("Please select a location before checkout.");
+      return;
+    }
     // Navigate to checkout page with cart details
-    navigation("/checkout", {
+    navigate("/checkout", {
       state: { cartItems, total, deliveryFee, discount },
     });
   };
@@ -82,7 +107,7 @@ const Cart = () => {
                     </button>
                   </td>
                   <td data-label="Sub Price">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    ₦{(item.price * item.quantity).toFixed(2)}
                   </td>
                   <td data-label="Action">
                     <CiTrash
@@ -107,12 +132,18 @@ const Cart = () => {
             <label>Shipping:</label>
             <select
               value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              onChange={handleLocationChange}
               style={{ marginTop: 10 }}
             >
               <option value="">Select Location</option>
-              <option value="location1">Location 1</option>
-              <option value="location2">Location 2</option>
+              <option value="Iwofe">Iwofe - ₦1500</option>
+              <option value="Agip">Agip - ₦1500</option>
+              <option value="Wimpy">Wimpy - ₦1500</option>
+              <option value="Adageorge">Adageorge - ₦1500</option>
+              <option value="Choba">Choba - ₦2500</option>
+              <option value="Rukpokwu">Rukpokwu - ₦2500</option>
+              <option value="Mile 1">Mile 1 - ₦2500</option>
+              <option value="Rumola">Rumola - ₦2500</option>
               {/* Add more locations as needed */}
             </select>
           </div>
@@ -121,22 +152,22 @@ const Cart = () => {
             <div className="total-section">
               <div className="delivery">
                 <p>Express Delivery</p>
-                {location && <p> ${deliveryFee.toFixed(2)}</p>}
+                {location && <p> ₦{deliveryFee.toFixed(2)}</p>}
               </div>
               <div className="del">
                 <p>Sub Total</p>
-                <p> ${totalWithoutDiscount.toFixed(2)}</p>
+                <p> ₦{totalWithoutDiscount.toFixed(2)}</p>
               </div>
               {discount > 0 && (
                 <div className="del">
                   <p>Discount</p>
-                  <p> ${(totalWithoutDiscount * discount).toFixed(2)}</p>
+                  <p> ₦{(totalWithoutDiscount * discount).toFixed(2)}</p>
                 </div>
               )}
 
               <div className="del">
                 <h3>Total</h3>
-                <h3> ${total.toFixed(2)}</h3>
+                <h3> ₦{total.toFixed(2)}</h3>
               </div>
               <button onClick={handleCheckout}>Checkout</button>
             </div>

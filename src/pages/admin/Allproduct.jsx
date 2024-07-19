@@ -102,7 +102,7 @@ const AllProduct = () => {
               <div style={{ width: "70%" }}>
                 <h3>{product.name}</h3>
                 <p>{product.category}</p>
-                <p>${product.price.toFixed(2)}</p>
+                <p> ₦{product.price.toFixed(2)}</p>
               </div>
             </div>
             <h3>Description</h3>
