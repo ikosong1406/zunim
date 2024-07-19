@@ -49,7 +49,7 @@ const ProductCard = ({ product }) => {
           className="product-image"
         />
         <h3 className="product-names">{product.name}</h3>
-        <p className="product-prices">${product.price.toFixed(2)}</p>
+        <p className="product-prices">₦{product.price.toFixed(2)}</p>
       </Link>
       {quantity === 0 ? (
         <button className="add-to-cart-button" onClick={handleAddToCart}>
