@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../../styles/client/About.css";
-import { RiSecurePaymentFill } from "react-icons/ri";
-import { FaShippingFast } from "react-icons/fa";
+import { FaShop } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
@@ -37,15 +37,29 @@ const About = () => {
   return (
     <div className="aboutMain">
       <div className="aboutDiv1">
-        <h1>Welcome to Our Store</h1>
-        <h3>Your one-stop shop for all your lifestyle needs.</h3>
+        <h1>
+          At Zunim, we believe in sustainable living and are passionate about
+          enriching your lifestyle.
+        </h1>
+        <h3>
+          Our store offers a broad variety of products, thoughtfully curated to
+          bring comfort, style, and sustainability to your home. From chic decor
+          items to everyday essentials, we aim to provide high-quality products
+          that make life at home more enjoyable and eco-friendly. Explore our
+          diverse range of products and join us in creating a more sustainable
+          and stylish world.
+        </h3>
       </div>
 
       <div className="homeDiv4">
         <div className="homeDiv41"></div>
         <div className="homeDiv42">
           <h2>About Us</h2>
-          <h3>Thousands of lifestyle products waiting for you</h3>
+          <h3>
+            Zunim is a lifestyle store based in Port Harcourt, Nigeria. Est
+            since 2024. Our customer service is always prepared to support you
+            24/7
+          </h3>
           <Link className="cta" to="/shop">
             Shop Now
           </Link>
@@ -56,25 +70,21 @@ const About = () => {
         <h1>Contact Us</h1>
         <div className="homeDiv5">
           <div className="homeDiv51">
-            <FaShippingFast className="icon" />
+            <FaShop className="icon" />
             <p>Address</p>
             <p style={{ textAlign: "center" }}>
               1234 Market Street, Suite 200, San Francisco, CA 94103
             </p>
           </div>
           <div className="homeDiv51">
-            <RiSecurePaymentFill className="icon" />
+            <FaPhone className="icon" />
             <p>Contact Us</p>
-            <p style={{ textAlign: "center" }}>
-              For any inquiries, please email us at support@store.com
-            </p>
+            <p style={{ textAlign: "center" }}>+234 7012571616</p>
           </div>
           <div className="homeDiv51">
-            <FaPhone className="icon" />
+            <MdEmail className="icon" />
             <p>Message Us</p>
-            <p style={{ textAlign: "center" }}>
-              Send us a message and we'll get back to you as soon as possible.
-            </p>
+            <p style={{ textAlign: "center" }}>Support@zunim.com.ng</p>
           </div>
         </div>
 

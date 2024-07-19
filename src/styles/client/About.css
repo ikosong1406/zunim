@@ -10,6 +10,17 @@
   margin-bottom: 30px;
 }
 
+.aboutDiv1 h1 {
+  color: var(--dark);
+  font-size: 35px;
+}
+
+.aboutDiv1 h3 {
+  color: var(--dark);
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .aboutDiv2 h1 {
   text-align: center;
   margin-top: 50px;
@@ -115,12 +126,12 @@
     font-size: 16px;
   }
 
-  .aboutDiv2 {
-    padding: 10px;
-  }
-
   .aboutDiv1 h3 {
     font-size: 13px;
+  }
+
+  .aboutDiv2 {
+    padding: 10px;
   }
 
   .aboutDiv2 h1 {
