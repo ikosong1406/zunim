@@ -3,6 +3,8 @@ import { CartContext } from "../../components/CartContext";
 import "../../styles/client/Cart.css";
 import { useNavigate } from "react-router-dom";
 import { CiTrash } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
@@ -18,7 +20,7 @@ const Cart = () => {
       setDiscount(0.1); // 10% discount
     } else {
       setDiscount(0);
-      alert("Invalid coupon code");
+      toast.error("Invalid coupon code");
     }
   };
 
@@ -53,7 +55,7 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (!location) {
-      alert("Please select a location before checkout.");
+      toast.error("Please select a location before checkout.");
       return;
     }
     // Navigate to checkout page with cart details
@@ -64,6 +66,7 @@ const Cart = () => {
 
   return (
     <div className="homeMain" style={{ minHeight: 500 }}>
+      <ToastContainer />
       <h1 className="shop">Cart</h1>
       {cartItems.length === 0 ? (
         <div className="empty-cart">
@@ -151,7 +154,7 @@ const Cart = () => {
           <div style={{ paddingRight: 20, paddingLeft: 20 }}>
             <div className="total-section">
               <div className="delivery">
-                <p>Express Delivery</p>
+                <p>Standard Delivery(3 - 5 business days)</p>
                 {location && <p> ₦{deliveryFee.toFixed(2)}</p>}
               </div>
               <div className="del">

@@ -6,6 +6,8 @@ import { FaShop } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const About = () => {
   const [name, setName] = useState();
@@ -36,6 +38,7 @@ const About = () => {
 
   return (
     <div className="aboutMain">
+      <ToastContainer />
       <div className="aboutDiv1">
         <h1>
           At Zunim, we believe in sustainable living and are passionate about

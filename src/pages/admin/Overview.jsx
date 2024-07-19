@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import { FaShoppingBag } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { FaFirstOrder } from "react-icons/fa";
-import { FaChartLine } from "react-icons/fa6";
-import { MdOutlinePendingActions } from "react-icons/md";
 import Colors from "../../components/Colors";
 import "../../styles/admin/Overview.css";
 import SalesChart from "../../components/SalesChart";

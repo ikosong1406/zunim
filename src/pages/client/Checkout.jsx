@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CartContext } from "../../components/CartContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Checkout = () => {
   const location = useLocation();
@@ -46,7 +48,7 @@ const Checkout = () => {
       !shippingAddress.state ||
       !shippingAddress.zipCode
     ) {
-      alert("Please fill in all fields before proceeding to payment.");
+      toast.error("Please fill in all fields before proceeding to payment.");
       return;
     }
 
@@ -66,11 +68,11 @@ const Checkout = () => {
             },
           });
         } else {
-          alert("Payment was not successful. Please try again.");
+          toast.error("Payment was not successful. Please try again.");
         }
       },
       onClose: () => {
-        alert("Transaction was not completed.");
+        toast.warning("Transaction was not completed.");
       },
     });
     handler.openIframe();
@@ -78,6 +80,7 @@ const Checkout = () => {
 
   return (
     <div className="homeMain" style={{ paddingLeft: 20, paddingRight: 20 }}>
+      <ToastContainer />
       <h1 className="shop">Checkout</h1>
       <div className="checkout-section">
         <h3>Contact Information</h3>
