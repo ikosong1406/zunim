@@ -8,7 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Colors from "./Colors";
-import user from "../images/usericon.jpeg";
 import axios from "axios";
 // import BackendApi from "../Api/BackendApi";
 // import { getUserToken } from "../Api/storage";

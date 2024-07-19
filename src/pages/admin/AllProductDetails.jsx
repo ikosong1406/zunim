@@ -71,19 +71,6 @@ const AllProductDetails = () => {
               cursor: "pointer",
             }}
           ></input>
-          <h3>Brand Name</h3>
-          <input
-            type="text"
-            name="brandName"
-            value={productDetails.brandName}
-            onChange={handleChange}
-            placeholder="Brand Name"
-            style={{
-              border: "1px solid #2e3637",
-              borderRadius: 10,
-              cursor: "pointer",
-            }}
-          />
           <h3>Description</h3>
           <textarea
             name="description"

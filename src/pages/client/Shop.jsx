@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 import ProductCard from "../../components/ProductCard";
 import products from "../../components/DummyData";
 import ProductFilter from "../../components/ProductFilter";
@@ -33,11 +34,13 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    if (location.state) {
-      const { category, brand } = location.state;
-      handleFilter({ category, brand });
-    }
-  }, [location.state]);
+    const { category, minPrice, maxPrice } = queryString.parse(location.search);
+    handleFilter({
+      category: category ? decodeURIComponent(category) : null,
+      minPrice,
+      maxPrice,
+    });
+  }, [location.search]);
 
   return (
     <div className="homeMain" style={{ paddingLeft: 20, paddingRight: 20 }}>

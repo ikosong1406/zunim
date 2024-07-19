@@ -46,11 +46,30 @@ const Product = () => {
   return (
     <div className="homeMain">
       <div className="product-details">
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="product-image"
-        />
+        <div className="productImagediv">
+          <img
+            src={product.mainImage}
+            alt={product.name}
+            className="product-image"
+          />
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+              marginTop: -30,
+            }}
+          >
+            {product.additionalImages.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt="image"
+                style={{ width: "25%" }}
+              />
+            ))}
+          </div>
+        </div>
         <div className="product-info">
           <h2 className="product-name">{product.name}</h2>
           <p className="product-about">{product.about}</p>

@@ -1,9 +1,9 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/client/Home.css";
 import bottle from "../../images/waterbottle-removebg-preview.png";
 import wbottle from "../../images/bottle.jpeg";
 import beads from "../../images/beads.jpeg";
-import { Link } from "react-router-dom";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { FaShippingFast } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
@@ -18,6 +18,12 @@ const Home = () => {
   const bestSellers = products
     .filter((product) => product.isBestSeller)
     .slice(0, 8);
+
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category) => {
+    navigate(`/shop?category=${encodeURIComponent(category)}`);
+  };
 
   return (
     <div className="homeMain">
@@ -58,43 +64,43 @@ const Home = () => {
           <h2>Shop By Categories</h2>
         </div>
         <div className="homeDiv32">
-          <div>
+          <div onClick={() => handleCategoryClick("Apparel & Footware")}>
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Water Bottle</p>
+            <p>Apparel & Footware</p>
           </div>
-          <div>
+          <div onClick={() => handleCategoryClick("Beauty & Personal Care")}>
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Water Bottle</p>
+            <p>Beauty & Personal care</p>
           </div>
-          <div>
+          <div onClick={() => handleCategoryClick("Kitchen & Dinning")}>
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Water Bottle</p>
+            <p>Kitchen & Dinning</p>
           </div>
         </div>
         <div className="homeDiv32">
-          <div>
+          <div onClick={() => handleCategoryClick("Home Interiors")}>
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Water Bottle</p>
+            <p>Home Interiors</p>
           </div>
-          <div>
+          <div onClick={() => handleCategoryClick("Phone Accessories")}>
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Water Bottle</p>
+            <p>Phone Accessories</p>
           </div>
-          <div>
+          <div onClick={() => handleCategoryClick("Office Products")}>
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Water Bottle</p>
+            <p>Office Products</p>
           </div>
         </div>
       </div>

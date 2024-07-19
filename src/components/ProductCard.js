@@ -44,9 +44,9 @@ const ProductCard = ({ product }) => {
     <div className="product-card">
       <Link to={`/product/${product.id}`} style={{ textDecoration: "none" }}>
         <img
-          src={product.imageUrl}
+          src={product.mainImage}
           alt={product.name}
-          className="product-image"
+          className="product-image2"
         />
         <h3 className="product-names">{product.name}</h3>
         <p className="product-prices">₦{product.price.toFixed(2)}</p>
