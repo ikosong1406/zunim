@@ -49,7 +49,7 @@ const Footer = () => {
               <h3> Privacy Policy</h3>
             </NavLink>
             <NavLink
-              to="/termsofuse"
+              to="/terms"
               style={{ textDecoration: "none", color: Colors.ash }}
             >
               <h3> Terms of use </h3>

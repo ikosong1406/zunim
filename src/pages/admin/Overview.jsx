@@ -3,10 +3,13 @@ import { FaShoppingBag } from "react-icons/fa";
 import Colors from "../../components/Colors";
 import "../../styles/admin/Overview.css";
 import SalesChart from "../../components/SalesChart";
+import orders from "../../components/OrderData";
 
 const Overview = () => {
-  const [numUsers, setNumUsers] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const pendingOrders = orders.filter((order) => order.status === "pending");
+  const deliveredOrders = orders.filter(
+    (order) => order.status === "delivered"
+  );
 
   return (
     <div>
@@ -17,13 +20,13 @@ const Overview = () => {
         <div className="adHomeDiv21">
           <div className="adHome211">
             <p style={{ color: "gray", fontWeight: 500 }}>Total Orders</p>
-            <h2 style={{ color: Colors.ash }}>{numUsers}</h2>
+            <h2 style={{ color: Colors.ash }}>{orders.length}</h2>
           </div>
           <FaShoppingBag
             style={{
               fontSize: 30,
               padding: 5,
-              backgroundColor: "blueviolet",
+              backgroundColor: Colors.pink,
               color: Colors.ash,
               borderRadius: 10,
             }}
@@ -31,23 +34,23 @@ const Overview = () => {
         </div>
         <div className="adHomeDiv21">
           <div className="adHome211">
-            <p style={{ color: "gray", fontWeight: 500 }}>Active Orders</p>
-            <h2 style={{ color: Colors.ash }}>0</h2>
+            <p style={{ color: "gray", fontWeight: 500 }}>Pending Orders</p>
+            <h2 style={{ color: Colors.ash }}>{pendingOrders.length}</h2>
           </div>
           <FaShoppingBag
             style={{
               fontSize: 30,
               padding: 5,
-              backgroundColor: "blue",
-              color: Colors.ash,
+              backgroundColor: "yellow",
+              color: Colors.dark,
               borderRadius: 10,
             }}
           />
         </div>
         <div className="adHomeDiv21">
           <div className="adHome211">
-            <p style={{ color: "gray", fontWeight: 500 }}>Completed Orders</p>
-            <h2 style={{ color: Colors.ash }}>0</h2>
+            <p style={{ color: "gray", fontWeight: 500 }}>Delivered Orders</p>
+            <h2 style={{ color: Colors.ash }}>{deliveredOrders.length}</h2>
           </div>
           <FaShoppingBag
             style={{

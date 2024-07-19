@@ -17,6 +17,8 @@ import Checkout from "./pages/client/Checkout";
 import New from "./pages/client/New";
 import Best from "./pages/client/Best";
 import Search from "./pages/client/Search";
+import Terms from "./pages/client/Terms";
+import Privacy from "./pages/client/Privacy";
 import CartProvider from "./components/CartContext";
 import AdminLayout from "./components/AdminLayout";
 import Overview from "./pages/admin/Overview";
@@ -141,6 +143,22 @@ const App = () => {
                   element={
                     <Layout1>
                       <Search />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/privacy"
+                  element={
+                    <Layout1>
+                      <Privacy />
+                    </Layout1>
+                  }
+                />
+                <Route
+                  path="/terms"
+                  element={
+                    <Layout1>
+                      <Terms />
                     </Layout1>
                   }
                 />

@@ -11,6 +11,7 @@
   background-color: var(--ash);
   padding-bottom: 30px;
   font-family: "Roboto", sans-serif;
+  color: var(--dark);
 }
 
 .homeDiv1 {

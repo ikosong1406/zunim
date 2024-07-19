@@ -1,51 +1,76 @@
-// src/components/SalesChart.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import salesData from "./SalesData";
+import orders from "./OrderData";
 import Colors from "./Colors";
+import dayjs from "dayjs";
+import isoWeek from "dayjs/plugin/isoWeek";
+import isoWeeksInYear from "dayjs/plugin/isoWeeksInYear";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(isoWeek);
+dayjs.extend(isoWeeksInYear);
+dayjs.extend(advancedFormat);
 
 const SalesChart = () => {
   const [timeframe, setTimeframe] = useState("daily");
+  const [chartData, setChartData] = useState({ options: {}, series: [] });
 
-  const getChartData = () => {
-    let labels = [];
-    let data = [];
+  useEffect(() => {
+    const getChartData = () => {
+      let labels = [];
+      let data = [];
+      let salesData = {};
 
-    if (timeframe === "daily") {
-      labels = salesData.daily.map((item) => item.date);
-      data = salesData.daily.map((item) => item.sales);
-    } else if (timeframe === "weekly") {
-      labels = salesData.weekly.map((item) => item.week);
-      data = salesData.weekly.map((item) => item.sales);
-    } else if (timeframe === "monthly") {
-      labels = salesData.monthly.map((item) => item.month);
-      data = salesData.monthly.map((item) => item.sales);
-    }
+      if (timeframe === "daily") {
+        salesData = orders.reduce((acc, order) => {
+          const date = dayjs(order.date).format("YYYY-MM-DD");
+          acc[date] = (acc[date] || 0) + order.total;
+          return acc;
+        }, {});
+        labels = Object.keys(salesData);
+        data = Object.values(salesData);
+      } else if (timeframe === "weekly") {
+        salesData = orders.reduce((acc, order) => {
+          const week = dayjs(order.date).isoWeek();
+          const year = dayjs(order.date).year();
+          const weekLabel = `${year}-W${week}`;
+          acc[weekLabel] = (acc[weekLabel] || 0) + order.total;
+          return acc;
+        }, {});
+        labels = Object.keys(salesData);
+        data = Object.values(salesData);
+      } else if (timeframe === "monthly") {
+        salesData = orders.reduce((acc, order) => {
+          const month = dayjs(order.date).format("YYYY-MM");
+          acc[month] = (acc[month] || 0) + order.total;
+          return acc;
+        }, {});
+        labels = Object.keys(salesData);
+        data = Object.values(salesData);
+      }
 
-    return {
-      options: {
-        chart: {
-          id: "sales-chart",
+      return {
+        options: {
+          chart: {
+            id: "sales-chart",
+          },
+          xaxis: {
+            categories: labels,
+          },
+          stroke: {
+            curve: "smooth",
+          },
         },
-        xaxis: {
-          categories: labels,
-        },
-        stroke: {
-          curve: "smooth",
-        },
-        // title: {
-        //   text: "Sales Overview",
-        //   align: "left",
-        // },
-      },
-      series: [
-        {
-          name: "Sales",
-          data,
-        },
-      ],
+        series: [
+          {
+            name: "Sales",
+            data,
+          },
+        ],
+      };
     };
-  };
+
+    setChartData(getChartData());
+  }, [timeframe]);
 
   return (
     <div>
@@ -66,8 +91,8 @@ const SalesChart = () => {
         </div>
       </div>
       <Chart
-        options={getChartData().options}
-        series={getChartData().series}
+        options={chartData.options}
+        series={chartData.series}
         type="line"
         height={300}
       />
