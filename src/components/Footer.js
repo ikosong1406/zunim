@@ -18,20 +18,17 @@ const Footer = () => {
           <h3>Lifestyle Store</h3>
         </div>
         <div className="footerDiv22">
-          <NavLink
-            to="/market"
-            style={{ textDecoration: "none", color: Colors.ash }}
-          >
+          <NavLink to="/" style={{ textDecoration: "none", color: Colors.ash }}>
             <h3> Home</h3>
           </NavLink>
           <NavLink
-            to="/privacy"
+            to="/shop"
             style={{ textDecoration: "none", color: Colors.ash }}
           >
             <h3> Shop</h3>
           </NavLink>
           <NavLink
-            to="/termsofuse"
+            to="/about"
             style={{ textDecoration: "none", color: Colors.ash }}
           >
             <h3> Contact Us </h3>
