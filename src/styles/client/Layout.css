@@ -1,0 +1,41 @@
+/* Layout.css */
+
+.layout-container {
+  display: flex;
+  flex-direction: row;
+  background: var(--indigo);
+}
+
+/* .sidebar-container {
+  width: 10%;
+} */
+
+.page-container {
+  width: 100%;
+}
+
+.bottom-tab-container {
+  display: none; /* Hidden by default */
+}
+
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+  }
+
+  .sidebar-container {
+    display: none; /* Hide the sidebar on small screens */
+  }
+
+  .page-container {
+    width: 100%;
+    height: 90%;
+    padding-bottom: 50px;
+  }
+
+  .bottom-tab-container {
+    display: block;
+    height: 10%;
+  }
+}

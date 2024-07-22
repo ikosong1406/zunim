@@ -3,8 +3,9 @@ import "../styles/client/Header1.css";
 import { NavLink } from "react-router-dom";
 import Colors from "../components/Colors";
 import { FaSearch } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
+import { FaShop } from "react-icons/fa6";
 import { FaCartPlus } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { CartContext } from "./CartContext";
 
 const Header1 = ({ clicked, setClicked }) => {
@@ -28,42 +29,15 @@ const Header1 = ({ clicked, setClicked }) => {
         </NavLink>
       </div>
 
-      <div className="navList">
-        <NavLink to="/" style={{ textDecoration: "none" }}>
-          <h3 className="navItems"> Home</h3>
-        </NavLink>
-        <NavLink to="/shop" style={{ textDecoration: "none" }}>
-          <h3 className="navItems"> Shop</h3>
-        </NavLink>
-        <NavLink to="/about" style={{ textDecoration: "none" }}>
-          <h3 className="navItems"> Contact Us </h3>
-        </NavLink>
-      </div>
+      <NavLink to="/search" className="authLinks">
+        <FaSearch className="search" />
+        <p>Search for products, brands and categories</p>
+      </NavLink>
 
-      <div className="authLinks">
-        <NavLink
-          to="/search"
-          style={{ textDecoration: "none", color: Colors.dark }}
-        >
-          <FaSearch />
-        </NavLink>
-        <NavLink
-          to="/cart"
-          style={{ textDecoration: "none", color: Colors.dark }}
-        >
-          <FaCartPlus />{" "}
-          <span
-            style={{
-              backgroundColor: Colors.ash,
-              padding: 2.5,
-              borderRadius: 5,
-              fontWeight: "500",
-              fontSize: 14,
-            }}
-          >
-            {cartItems.length}
-          </span>
-        </NavLink>
+      <div className="head1Div2">
+        <FaShop className="ico11" to="/shop" />
+        <FaCartPlus className="ico11" to="/cart" />
+        <FaUser className="ico11" to="/about" />
       </div>
     </div>
   );

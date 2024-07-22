@@ -210,6 +210,20 @@
   gap: 15px;
 }
 
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .homeDiv71 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .homeDiv21 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+}
+
 @media screen and (max-width: 925px) {
   .homeDiv1 {
     display: block;
@@ -239,7 +253,7 @@
   }
 
   .cta2 {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .homeDiv12 {
@@ -253,6 +267,10 @@
 
   .homeDiv2 {
     padding: 20px;
+  }
+
+  .homeDiv2 h2 {
+    font-size: 15px;
   }
 
   .homeDiv21 {
@@ -278,7 +296,7 @@
 
   .homeDiv32 p {
     font-weight: 500;
-    font-size: 10px;
+    font-size: 13px;
     text-align: center;
     color: var(--dark);
   }
@@ -368,6 +386,10 @@
 
   .homeDiv7 {
     padding: 20px;
+  }
+
+  .homeDiv7 h2 {
+    font-size: 15px;
   }
 
   .homeDiv71 {

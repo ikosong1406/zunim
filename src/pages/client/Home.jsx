@@ -46,19 +46,6 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="homeDiv2">
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <h2>New Arrivals</h2>
-          <Link className="cta2" to="/new">
-            See All
-          </Link>
-        </div>
-        <div className="homeDiv21">
-          {newArrivals.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
       <div className="homeDiv3">
         <div className="homeDiv31">
           <h2>Shop By Categories</h2>
@@ -68,7 +55,7 @@ const Home = () => {
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Apparel & Footware</p>
+            <p>Apparel & Footwear</p>
           </div>
           <div onClick={() => handleCategoryClick("Beauty & Personal Care")}>
             <div className="homeDiv321">
@@ -102,6 +89,20 @@ const Home = () => {
             </div>
             <p>Office Products</p>
           </div>
+        </div>
+      </div>
+
+      <div className="homeDiv2">
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h2>New Arrivals</h2>
+          <Link className="cta2" to="/new">
+            See All
+          </Link>
+        </div>
+        <div className="homeDiv21">
+          {newArrivals.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       </div>
 

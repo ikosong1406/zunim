@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThreeCircles } from "react-loader-spinner";
 import "./App.css";
 import Colors from "./components/Colors";
+import Layout from "./components/Layout";
 import Landing from "./pages/client/Home";
 import Header1 from "./components/Header1";
 import Footer from "./components/Footer";
@@ -64,40 +65,52 @@ const App = () => {
           <CartProvider>
             <Router>
               <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Layout1>
-                      <Landing />
-                    </Layout1>
-                  }
-                />
+                <Route path="/" element={<Layout />}>
+                  <Route
+                    index
+                    element={
+                      <Layout1>
+                        <Landing />
+                      </Layout1>
+                    }
+                  />
+                  <Route
+                    path="main"
+                    element={
+                      <Layout1>
+                        <Landing />
+                      </Layout1>
+                    }
+                  />
+                  <Route
+                    path="shop"
+                    element={
+                      <Layout1>
+                        <Shop />
+                      </Layout1>
+                    }
+                  />
+                  <Route
+                    path="cart"
+                    element={
+                      <Layout1>
+                        <Cart />
+                      </Layout1>
+                    }
+                  />
+                  <Route
+                    path="about"
+                    element={
+                      <Layout1>
+                        <About />
+                      </Layout1>
+                    }
+                  />
+                </Route>
+
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route
-                  path="/about"
-                  element={
-                    <Layout1>
-                      <About />
-                    </Layout1>
-                  }
-                />
-                <Route
-                  path="/cart"
-                  element={
-                    <Layout1>
-                      <Cart />
-                    </Layout1>
-                  }
-                />
-                <Route
-                  path="/shop"
-                  element={
-                    <Layout1>
-                      <Shop />
-                    </Layout1>
-                  }
-                />
+
                 <Route
                   path="/product/:id"
                   element={
