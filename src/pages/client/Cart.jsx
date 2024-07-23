@@ -28,6 +28,9 @@ const Cart = () => {
     const selectedLocation = e.target.value;
     setLocation(selectedLocation);
     switch (selectedLocation) {
+      case "Pickup":
+        setDeliveryFee(0);
+        break;
       case "Iwofe":
       case "Agip":
       case "Wimpy":
@@ -65,7 +68,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="homeMain" style={{ minHeight: 500 }}>
+    <div className="homeMain" style={{ minHeight: 750 }}>
       <ToastContainer />
       <h1 className="shop">Cart</h1>
       {cartItems.length === 0 ? (
@@ -139,6 +142,7 @@ const Cart = () => {
               style={{ marginTop: 10 }}
             >
               <option value="">Select Location</option>
+              <option value="Pickup">Pickup - ₦0</option>
               <option value="Iwofe">Iwofe - ₦1500</option>
               <option value="Agip">Agip - ₦1500</option>
               <option value="Wimpy">Wimpy - ₦1500</option>
