@@ -6,7 +6,7 @@
   display: flex;
   padding: 10px;
   padding-left: 150px;
-  /* padding-right: 500px; */
+  padding-right: 500px;
   justify-content: space-between;
 }
 
@@ -27,7 +27,6 @@
   display: flex;
   text-decoration: none;
   width: 30%;
-  /* margin-left: 100px; */
   border-radius: 10px;
   background-color: var(--ash);
   color: var(--dark);

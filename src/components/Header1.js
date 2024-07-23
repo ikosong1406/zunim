@@ -35,9 +35,26 @@ const Header1 = ({ clicked, setClicked }) => {
       </NavLink>
 
       <div className="head1Div2">
-        <FaShop className="ico11" to="/shop" />
-        <FaCartPlus className="ico11" to="/cart" />
-        <FaUser className="ico11" to="/about" />
+        <NavLink>
+          <FaShop className="ico11" to="/shop" />
+        </NavLink>
+        <NavLink style={{ textDecoration: "none", display: "flex" }}>
+          <FaCartPlus className="ico11" to="/cart" />
+          <span
+            style={{
+              fontWeight: "600",
+              alignSelf: "center",
+              fontSize: 17,
+              marginLeft: 5,
+              color: Colors.ash,
+            }}
+          >
+            {cartItems.length}
+          </span>
+        </NavLink>
+        <NavLink>
+          <FaUser className="ico11" to="/about" />
+        </NavLink>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const Layout = () => {
 
   return (
     <div className="layout-container">
-      <div className="page-container">
+      <div className="page-container2">
         <Outlet />
       </div>
       {width <= 925 ? (

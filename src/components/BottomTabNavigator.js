@@ -7,6 +7,7 @@ import { FaShop } from "react-icons/fa6";
 import { FaCartPlus } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { CartContext } from "./CartContext";
+import Colors from "./Colors";
 
 const BottomTabNavigator = () => {
   const [showNav, setShowNav] = useState(false);
@@ -40,7 +41,7 @@ const BottomTabNavigator = () => {
           style={{
             fontWeight: "600",
             alignSelf: "center",
-            fontSize: 20,
+            fontSize: 18,
             marginLeft: 5,
           }}
         >
