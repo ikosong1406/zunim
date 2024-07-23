@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/client/Home.css";
-import bottle from "../../images/waterbottle-removebg-preview.png";
 import wbottle from "../../images/bottle.jpeg";
 import beads from "../../images/beads.jpeg";
 import { RiSecurePaymentFill } from "react-icons/ri";
@@ -10,6 +9,7 @@ import { FaPhone } from "react-icons/fa6";
 import ProductCard from "../../components/ProductCard";
 import products from "../../components/DummyData";
 import Colors from "../../components/Colors";
+import Swiper from "../../components/Swiper";
 
 const Home = () => {
   const newArrivals = products
@@ -27,23 +27,8 @@ const Home = () => {
 
   return (
     <div className="homeMain">
-      <div className="homeDiv1">
-        <div className="homeDiv11">
-          <h1>
-            Refresh Your <span style={{ color: Colors.ash }}>Day</span>, Every{" "}
-            <span style={{ color: Colors.ash }}>Day</span>
-          </h1>
-          <h3>
-            Stay hydrated and energized with our premium water bottles, designed
-            for a healthy and active lifestyle.
-          </h3>
-          <Link className="cta" to="/shop">
-            Shopping Now
-          </Link>
-        </div>
-        <div className="homeDiv12">
-          <img src={bottle} alt="bottle" />
-        </div>
+      <div>
+        <Swiper />
       </div>
 
       <div className="homeDiv3">
