@@ -53,7 +53,7 @@ const Search = () => {
   return (
     <div
       className="homeMain"
-      style={{ paddingLeft: 20, paddingRight: 20, height: 600 }}
+      style={{ paddingLeft: 20, paddingRight: 20, height: 830 }}
     >
       <h1 className="shop">Search</h1>
       <input
