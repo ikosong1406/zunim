@@ -53,3 +53,7 @@
 .filter-modal button {
   cursor: pointer;
 }
+
+.pagination-container {
+  margin-top: 30px;
+}

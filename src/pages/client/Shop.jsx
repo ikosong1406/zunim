@@ -12,7 +12,9 @@ const Shop = () => {
   const location = useLocation();
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const productsPerPage = 100;
   const categories = [...new Set(products.map((product) => product.category))];
 
   const handleFilter = ({ category, minPrice, maxPrice }) => {
@@ -31,6 +33,7 @@ const Shop = () => {
       );
     }
     setFilteredProducts(filtered);
+    setCurrentPage(1); // Reset to first page on filter change
   };
 
   useEffect(() => {
@@ -41,6 +44,26 @@ const Shop = () => {
       maxPrice,
     });
   }, [location.search]);
+
+  // Get current products for the current page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(filteredProducts.length / productsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <div className="homeMain" style={{ paddingLeft: 20, paddingRight: 20 }}>
@@ -55,9 +78,26 @@ const Shop = () => {
         </h3>
       </div>
       <div className="homeDiv71">
-        {filteredProducts.map((product) => (
+        {currentProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+        <div className="pagination-container">
+          <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button
+            onClick={handleNextPage}
+            disabled={
+              currentPage ===
+              Math.ceil(filteredProducts.length / productsPerPage)
+            }
+          >
+            Next
+          </button>
+        </div>
       </div>
       <Modal
         show={showFilterModal}

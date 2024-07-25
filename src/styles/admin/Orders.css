@@ -63,3 +63,16 @@ button {
 .status-pending {
   background-color: yellow;
 }
+
+.filter-container {
+  margin-left: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.filter-container input {
+  border: 1px solid var(--dark);
+  margin-top: 10px;
+  border-radius: 5px;
+}

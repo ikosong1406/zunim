@@ -1,4 +1,3 @@
-// src/pages/admin/AllProduct.js
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import products from "../../components/DummyData";
@@ -12,8 +11,10 @@ import { FaPlus } from "react-icons/fa6";
 const AllProduct = () => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [showFilterModal, setShowFilterModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
+  const productsPerPage = 100;
 
   const categories = [...new Set(products.map((product) => product.category))];
 
@@ -33,6 +34,7 @@ const AllProduct = () => {
       );
     }
     setFilteredProducts(filtered);
+    setCurrentPage(1); // Reset to first page on filter change
   };
 
   const handleFilterModal = () => {
@@ -46,6 +48,26 @@ const AllProduct = () => {
 
   const handleAddNewProduct = () => {
     navigate("/admin/addingProduct");
+  };
+
+  // Get current products for the current page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(filteredProducts.length / productsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   return (
@@ -71,7 +93,7 @@ const AllProduct = () => {
         </div>
       </div>
       <div className="product-grid">
-        {filteredProducts.map((product) => (
+        {currentProducts.map((product) => (
           <Link
             to={`/admin/allProductDetails/${product.id}`}
             state={{ product }}
@@ -101,6 +123,23 @@ const AllProduct = () => {
             <p>{product.about}</p>
           </Link>
         ))}
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+        <div className="pagination-container">
+          <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+            Previous
+          </button>
+          <span>Page {currentPage}</span>
+          <button
+            onClick={handleNextPage}
+            disabled={
+              currentPage ===
+              Math.ceil(filteredProducts.length / productsPerPage)
+            }
+          >
+            Next
+          </button>
+        </div>
       </div>
       <Modal show={showFilterModal} onClose={handleFilterModal}>
         <ProductFilter categories={categories} onFilter={handleFilter} />

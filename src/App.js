@@ -28,6 +28,7 @@ import Orders from "./pages/admin/Orders";
 import OrderDetails from "./pages/admin/Orderdetails";
 import AddingProduct from "./pages/admin/Addingproduct";
 import AllProductDetails from "./pages/admin/AllProductDetails";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -64,6 +65,7 @@ const App = () => {
         <div>
           <CartProvider>
             <Router>
+              <ScrollToTop />
               <Routes>
                 <Route path="/" element={<Layout />}>
                   <Route

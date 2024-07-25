@@ -136,7 +136,27 @@ const AllProductDetails = () => {
         </div>
 
         <div style={{ display: "block" }}>
-          <img src={productDetails.imageUrl} style={{ marginTop: 0 }} />
+          <img
+            src={productDetails.mainImage}
+            style={{ marginTop: 0, height: 350 }}
+          />
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+              marginTop: -30,
+            }}
+          >
+            {productDetails.additionalImages.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt="image"
+                style={{ width: "25%" }}
+              />
+            ))}
+          </div>
           <div
             style={{
               marginTop: 20,
