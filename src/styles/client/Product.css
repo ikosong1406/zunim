@@ -219,11 +219,12 @@
   }
 
   .sim h2 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .sim .similar-products {
     display: flex;
+    justify-content: space-between;
     /* flex-direction: row; */
   }
 
