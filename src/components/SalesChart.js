@@ -26,8 +26,10 @@ const SalesChart = () => {
           acc[date] = (acc[date] || 0) + order.total;
           return acc;
         }, {});
-        labels = Object.keys(salesData);
-        data = Object.values(salesData);
+        labels = Object.keys(salesData).sort(
+          (a, b) => new Date(a) - new Date(b)
+        );
+        data = labels.map((label) => salesData[label]);
       } else if (timeframe === "weekly") {
         salesData = orders.reduce((acc, order) => {
           const week = dayjs(order.date).isoWeek();
@@ -36,16 +38,22 @@ const SalesChart = () => {
           acc[weekLabel] = (acc[weekLabel] || 0) + order.total;
           return acc;
         }, {});
-        labels = Object.keys(salesData);
-        data = Object.values(salesData);
+        labels = Object.keys(salesData).sort((a, b) => {
+          const [yearA, weekA] = a.split("-W");
+          const [yearB, weekB] = b.split("-W");
+          return new Date(yearA, 0, weekA * 7) - new Date(yearB, 0, weekB * 7);
+        });
+        data = labels.map((label) => salesData[label]);
       } else if (timeframe === "monthly") {
         salesData = orders.reduce((acc, order) => {
           const month = dayjs(order.date).format("YYYY-MM");
           acc[month] = (acc[month] || 0) + order.total;
           return acc;
         }, {});
-        labels = Object.keys(salesData);
-        data = Object.values(salesData);
+        labels = Object.keys(salesData).sort(
+          (a, b) => new Date(a) - new Date(b)
+        );
+        data = labels.map((label) => salesData[label]);
       }
 
       return {
