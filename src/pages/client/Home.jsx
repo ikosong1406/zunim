@@ -139,7 +139,7 @@ const Home = () => {
         <h4>NEWSFEED</h4>
         <h2>instagram</h2>
         <h3>follow us on social media for more discount and promotion</h3>
-        <h3>@zunimasthetics</h3>
+        <h3>@zunim.ecomerce</h3>
 
         <div className="homeDiv61">
           <img src={beads} alt="beads" />
