@@ -109,7 +109,7 @@ const AllProduct = () => {
             >
               <div style={{ width: "20%" }}>
                 <img
-                  src={product.imageUrl}
+                  src={product.mainImage}
                   style={{ width: 100, marginTop: 0 }}
                 />
               </div>
