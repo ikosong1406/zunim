@@ -8,7 +8,7 @@ const Layout = () => {
   const { width } = useWindowDimensions();
 
   return (
-    <div className="layout-container">
+    <div className="layout-container2">
       <div className="page-container2">
         <Outlet />
       </div>

@@ -1,19 +1,21 @@
 /* Layout.css */
 
 .layout-container {
-  /* display: flex;
-  flex-direction: row; */
-  background: var(--indigo);
+  display: flex;
+  flex-direction: row;
+  /* background: var(--ash); */
   display: block;
+  background-color: gray;
 }
 
-/* .sidebar-container {
+.sidebar-container {
   width: 10%;
-} */
+}
 
 .page-container {
-  /* width: 100%; */
-  width: 100vh;
+  width: 90%;
+  margin-left: 10%;
+  background-color: gray;
 }
 
 .bottom-tab-container {
@@ -30,10 +32,8 @@
     display: none; /* Hide the sidebar on small screens */
   }
 
-  .page-container {
-    /* width: 100%; */
-    height: 90%;
-    padding-bottom: 50px;
+  .page-container2 {
+    padding-bottom: 70px;
   }
 
   .bottom-tab-container {

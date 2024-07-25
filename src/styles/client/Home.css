@@ -12,6 +12,7 @@
   padding-bottom: 30px;
   font-family: "Roboto", sans-serif;
   color: var(--dark);
+  /* width: 100%; */
 }
 
 .homeDiv1 {
@@ -318,7 +319,7 @@
   .homeDiv4 {
     display: block;
     padding: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
   }
 
   .homeDiv41 {

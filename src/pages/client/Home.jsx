@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../styles/client/Home.css";
 import wbottle from "../../images/bottle.jpeg";
 import beads from "../../images/beads.jpeg";
+import men from "../../images/men.jpeg";
+import women from "../../images/women.jpeg";
+import phone from "../../images/phone.jpeg";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { FaShippingFast } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
@@ -36,11 +39,11 @@ const Home = () => {
           <h2>Shop By Categories</h2>
         </div>
         <div className="homeDiv32">
-          <div onClick={() => handleCategoryClick("Apparel & Footware")}>
+          <div onClick={() => handleCategoryClick("Men Fashion")}>
             <div className="homeDiv321">
-              <img src={wbottle} alt="bottle" />
+              <img src={men} alt="me fashion" />
             </div>
-            <p>Apparel & Footwear</p>
+            <p>Men Fashion</p>
           </div>
           <div onClick={() => handleCategoryClick("Beauty & Personal Care")}>
             <div className="homeDiv321">
@@ -56,15 +59,15 @@ const Home = () => {
           </div>
         </div>
         <div className="homeDiv32">
-          <div onClick={() => handleCategoryClick("Home Interiors")}>
+          <div onClick={() => handleCategoryClick("Women Fashion")}>
             <div className="homeDiv321">
-              <img src={wbottle} alt="bottle" />
+              <img src={women} alt="bottle" />
             </div>
-            <p>Home Interiors</p>
+            <p>Women Fashion</p>
           </div>
           <div onClick={() => handleCategoryClick("Phone Accessories")}>
             <div className="homeDiv321">
-              <img src={wbottle} alt="bottle" />
+              <img src={phone} alt="bottle" />
             </div>
             <p>Phone Accessories</p>
           </div>
@@ -72,7 +75,7 @@ const Home = () => {
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
-            <p>Office Products</p>
+            <p>Interior Decoration</p>
           </div>
         </div>
       </div>
