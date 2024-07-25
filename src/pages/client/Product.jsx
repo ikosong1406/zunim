@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { CartContext } from "../../components/CartContext";
 import "../../styles/client/Product.css";
 import products from "../../components/DummyData";
@@ -10,6 +10,7 @@ const Product = () => {
   const product = location.state?.product || products.find((p) => p.id === id);
   const { addToCart, cartItems, updateQuantity } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
+  const [similarProducts, setSimilarProducts] = useState([]);
 
   useEffect(() => {
     const cartItem = cartItems.find((item) => item.id === product.id);
@@ -18,7 +19,17 @@ const Product = () => {
     } else {
       setQuantity(0);
     }
-  }, [cartItems, product.id]);
+
+    // Find 5 random similar products
+    const findSimilarProducts = () => {
+      const filteredProducts = products.filter(
+        (p) => p.category === product.category && p.id !== product.id
+      );
+      const shuffledProducts = filteredProducts.sort(() => 0.5 - Math.random());
+      return shuffledProducts.slice(0, 3);
+    };
+    setSimilarProducts(findSimilarProducts());
+  }, [cartItems, product.id, product.category]);
 
   const handleAddToCart = () => {
     if (quantity === 0) {
@@ -74,14 +85,12 @@ const Product = () => {
         <div className="product-info">
           <h2 className="product-name">{product.name}</h2>
           <p className="product-about">{product.about}</p>
-          <h3 className="product-price"> ₦{product.price.toFixed(2)}</h3>
+          <h3 className="product-price">₦{product.price.toFixed(2)}</h3>
           <h3 className="product-description">Description</h3>
           <p className="product-descript">{product.description}</p>
           <p className="product-category">{product.category}</p>
           <div className="product-colors">
-            <h3 style={{ marginRight: 10, fontSize: 14 }}>
-              Available colors:{" "}
-            </h3>
+            <h3 style={{ marginRight: 10, fontSize: 14 }}>Available colors:</h3>
             {product.availableColors.map((color, index) => (
               <span
                 key={index}
@@ -103,6 +112,27 @@ const Product = () => {
               <button onClick={handleIncreaseQuantity}>+</button>
             </div>
           )}
+        </div>
+      </div>
+      <div className="sim">
+        <h2>Similar Products</h2>
+        <div className="similar-products">
+          {similarProducts.map((similarProduct) => (
+            <Link
+              to={`/product/${similarProduct.id}`}
+              state={{ product: similarProduct }}
+              key={similarProduct.id}
+              className="product-card2"
+            >
+              <img
+                src={similarProduct.mainImage}
+                alt={similarProduct.name}
+                className="product-image2"
+              />
+              <h3>{similarProduct.name}</h3>
+              <p>₦{similarProduct.price.toFixed(2)}</p>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
