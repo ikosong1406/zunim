@@ -6,6 +6,8 @@ import beads from "../../images/beads.jpeg";
 import men from "../../images/men.jpeg";
 import women from "../../images/women.jpeg";
 import phone from "../../images/phone.jpeg";
+import blender from "../../images/blender.jpeg";
+import sticker from "../../images/sticker.jpeg";
 import { RiSecurePaymentFill } from "react-icons/ri";
 import { FaShippingFast } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
@@ -53,7 +55,7 @@ const Home = () => {
           </div>
           <div onClick={() => handleCategoryClick("Kitchen & Dinning")}>
             <div className="homeDiv321">
-              <img src={wbottle} alt="bottle" />
+              <img src={blender} alt="bottle" />
             </div>
             <p>Kitchen & Dinning</p>
           </div>
@@ -71,9 +73,9 @@ const Home = () => {
             </div>
             <p>Phone Accessories</p>
           </div>
-          <div onClick={() => handleCategoryClick("Office Products")}>
+          <div onClick={() => handleCategoryClick("Interior Decoration")}>
             <div className="homeDiv321">
-              <img src={wbottle} alt="bottle" />
+              <img src={sticker} alt="bottle" />
             </div>
             <p>Interior Decoration</p>
           </div>
