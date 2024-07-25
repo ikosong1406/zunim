@@ -93,7 +93,7 @@ const Cart = () => {
                   <td data-label="Product">{item.name}</td>
                   <td data-label="Image">
                     <img
-                      src={item.image}
+                      src={item.mainImage}
                       alt={item.name}
                       className="cart-product-image"
                     />

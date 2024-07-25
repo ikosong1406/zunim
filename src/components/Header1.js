@@ -35,11 +35,11 @@ const Header1 = ({ clicked, setClicked }) => {
       </NavLink>
 
       <div className="head1Div2">
-        <NavLink>
-          <FaShop className="ico11" to="/shop" />
+        <NavLink to="/shop">
+          <FaShop className="ico11" />
         </NavLink>
-        <NavLink style={{ textDecoration: "none", display: "flex" }}>
-          <FaCartPlus className="ico11" to="/cart" />
+        <NavLink style={{ textDecoration: "none", display: "flex" }} to="/cart">
+          <FaCartPlus className="ico11" />
           <span
             style={{
               fontWeight: "600",
@@ -52,8 +52,8 @@ const Header1 = ({ clicked, setClicked }) => {
             {cartItems.length}
           </span>
         </NavLink>
-        <NavLink>
-          <FaUser className="ico11" to="/about" />
+        <NavLink to="/about">
+          <FaUser className="ico11" />
         </NavLink>
       </div>
     </div>
