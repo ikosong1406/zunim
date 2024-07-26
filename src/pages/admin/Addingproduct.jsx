@@ -3,21 +3,25 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/admin/AddingProduct.css";
 import Colors from "../../components/Colors";
 import { FaCamera } from "react-icons/fa";
+import axios from "axios";
+import api from "../../Api/BackendApi";
 
 const AddingProduct = () => {
   const [productData, setProductData] = useState({
     name: "",
-    brandName: "",
+    brand: "",
     about: "",
     description: "",
     category: "",
     price: "",
-    mainImage: "",
+    mainImage: null,
     additionalImages: [],
+    availableColors: [],
     isBestSeller: false,
     isNewArrival: false,
   });
 
+  const [colorInput, setColorInput] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -38,7 +42,7 @@ const AddingProduct = () => {
     if (file) {
       setProductData((prev) => ({
         ...prev,
-        mainImage: URL.createObjectURL(file),
+        mainImage: file,
       }));
     }
   };
@@ -50,9 +54,7 @@ const AddingProduct = () => {
         ...prev,
         additionalImages: [
           ...prev.additionalImages,
-          ...files
-            .slice(0, 3 - prev.additionalImages.length)
-            .map((file) => URL.createObjectURL(file)),
+          ...files.slice(0, 3 - prev.additionalImages.length),
         ],
       }));
     }
@@ -62,7 +64,7 @@ const AddingProduct = () => {
     if (index === 0) {
       setProductData((prev) => ({
         ...prev,
-        mainImage: "",
+        mainImage: null,
       }));
     } else {
       setProductData((prev) => ({
@@ -74,10 +76,48 @@ const AddingProduct = () => {
     }
   };
 
-  const handleSave = () => {
-    // Logic to save the product data
-    console.log("Product saved", productData);
-    navigate("/admin/allProduct");
+  const handleAddColor = () => {
+    if (colorInput.trim()) {
+      setProductData((prev) => ({
+        ...prev,
+        availableColors: [...prev.availableColors, colorInput.trim()],
+      }));
+      setColorInput("");
+    }
+  };
+
+  const handleSave = async () => {
+    const formData = new FormData();
+    formData.append("name", productData.name);
+    formData.append("brand", productData.brand);
+    formData.append("about", productData.about);
+    formData.append("description", productData.description);
+    formData.append("category", productData.category);
+    formData.append("price", productData.price);
+    formData.append("isBestSeller", productData.isBestSeller);
+    formData.append("isNewArrival", productData.isNewArrival);
+    formData.append(
+      "availableColors",
+      JSON.stringify(productData.availableColors)
+    );
+    if (productData.mainImage) {
+      formData.append("mainImage", productData.mainImage);
+    }
+    productData.additionalImages.forEach((image) => {
+      formData.append("additionalImages", image);
+    });
+
+    try {
+      const response = await axios.post(`${api}/createProduct`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Product saved", response.data);
+      navigate("/admin/allProduct");
+    } catch (error) {
+      console.error("Error saving product", error);
+    }
   };
 
   return (
@@ -176,6 +216,30 @@ const AddingProduct = () => {
               cursor: "pointer",
             }}
           />
+          <h3>Available Colors</h3>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input
+              type="text"
+              value={colorInput}
+              onChange={(e) => setColorInput(e.target.value)}
+              placeholder="Add Color"
+              style={{
+                border: "1px solid #2e3637",
+                borderRadius: 10,
+                cursor: "pointer",
+                marginRight: 10,
+              }}
+            />
+            <button onClick={handleAddColor}>Add Color</button>
+          </div>
+          <div style={{ marginTop: 10 }}>
+            {productData.availableColors.map((color, index) => (
+              <span key={index} style={{ marginRight: 10 }}>
+                {color}
+              </span>
+            ))}
+          </div>
+
           <div className="toggle-buttons" style={{ marginTop: 20 }}>
             <label>
               Best Seller

@@ -143,7 +143,7 @@ const Product = () => {
           <div className="product-colors">
             <h3 style={{ marginRight: 10, fontSize: 14 }}>Available colors:</h3>
             {product.availableColors && product.availableColors.length > 0 ? (
-              product.availableColors.map((color, index) => (
+              JSON.parse(product.availableColors).map((color, index) => (
                 <span
                   key={index}
                   className="color"
