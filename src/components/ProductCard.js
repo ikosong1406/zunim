@@ -1,4 +1,3 @@
-// src/components/ProductCard.js
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./CartContext";
