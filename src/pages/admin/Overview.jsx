@@ -3,16 +3,35 @@ import { FaShoppingBag } from "react-icons/fa";
 import Colors from "../../components/Colors";
 import "../../styles/admin/Overview.css";
 import SalesChart from "../../components/SalesChart";
-import orders from "../../components/OrderData";
+import { fetchOrders } from "../../components/OrdersData";
 
 const Overview = () => {
+  const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadOrders = async () => {
+      try {
+        const data = await fetchOrders(); // Fetch data from backend
+        setOrders(data); // Store data in state
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadOrders();
+  }, []);
+
   const pendingOrders = orders.filter((order) => order.status === "pending");
   const deliveredOrders = orders.filter(
     (order) => order.status === "delivered"
   );
 
   return (
-    <div>
+    <div style={{ minHeight: 600 }}>
       <div className="adHomeDiv1">
         <h1 style={{ color: Colors.ash, marginLeft: 20 }}>Dashboard</h1>
       </div>

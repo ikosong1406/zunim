@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import products from "../../components/DummyData";
+import { fetchProducts } from "../../components/ProductData";
 import ProductFilter from "../../components/ProductFilter";
 import Modal from "../../components/Modal";
 import "../../styles/admin/Allproduct.css";
@@ -9,12 +9,31 @@ import { FaFilter } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 
 const AllProduct = () => {
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
   const productsPerPage = 100;
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts(); // Fetch data from backend
+        setProducts(data); // Store data in state
+        setFilteredProducts(data); // Set initial filtered products
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   const categories = [...new Set(products.map((product) => product.category))];
 
@@ -42,9 +61,9 @@ const AllProduct = () => {
   };
 
   useEffect(() => {
-    // Reset filter on mount
+    // Reset filter when products change
     setFilteredProducts(products);
-  }, []);
+  }, [products]);
 
   const handleAddNewProduct = () => {
     navigate("/admin/addingProduct");
@@ -71,7 +90,7 @@ const AllProduct = () => {
   };
 
   return (
-    <div className="admin-products">
+    <div className="admin-products" style={{ minHeight: 600 }}>
       <div className="adHomeDiv1">
         <h1 style={{ color: Colors.ash, marginLeft: 20 }}>All Products</h1>
       </div>
@@ -95,9 +114,9 @@ const AllProduct = () => {
       <div className="product-grid">
         {currentProducts.map((product) => (
           <Link
-            to={`/admin/allProductDetails/${product.id}`}
+            to={`/admin/allProductDetails/${product._id}`}
             state={{ product }}
-            key={product.id}
+            key={product._id}
             className="product-card"
           >
             <div

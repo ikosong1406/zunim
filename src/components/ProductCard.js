@@ -10,13 +10,13 @@ const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    const cartItem = cartItems.find((item) => item.id === product.id);
+    const cartItem = cartItems.find((item) => item._id === product._id);
     if (cartItem) {
       setQuantity(cartItem.quantity);
     } else {
       setQuantity(0);
     }
-  }, [cartItems, product.id]);
+  }, [cartItems, product._id]);
 
   const handleAddToCart = () => {
     if (quantity === 0) {
@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="product-card">
-      <Link to={`/product/${product.id}`} style={{ textDecoration: "none" }}>
+      <Link to={`/product/${product._id}`} style={{ textDecoration: "none" }}>
         <img
           src={product.mainImage}
           alt={product.name}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import orders from "./OrderData";
+import { fetchOrders } from "./OrdersData";
 import Colors from "./Colors";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
@@ -11,6 +11,25 @@ dayjs.extend(isoWeeksInYear);
 dayjs.extend(advancedFormat);
 
 const SalesChart = () => {
+  const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadOrders = async () => {
+      try {
+        const data = await fetchOrders(); // Fetch data from backend
+        setOrders(data); // Store data in state
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadOrders();
+  }, []);
+
   const [timeframe, setTimeframe] = useState("daily");
   const [chartData, setChartData] = useState({ options: {}, series: [] });
 

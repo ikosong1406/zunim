@@ -1,6 +1,5 @@
-// src/pages/admin/AllProductDetails.js
 import React, { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../../styles/admin/Allproduct.css";
 import Colors from "../../components/Colors";
 
@@ -50,7 +49,7 @@ const AllProductDetails = () => {
           <input
             type="text"
             name="name"
-            value={productDetails.name}
+            value={productDetails.name || ""}
             onChange={handleChange}
             placeholder="Product Name"
             style={{
@@ -62,7 +61,7 @@ const AllProductDetails = () => {
           <h3>About Product</h3>
           <input
             name="about"
-            value={productDetails.about}
+            value={productDetails.about || ""}
             onChange={handleChange}
             placeholder="About"
             style={{
@@ -74,7 +73,7 @@ const AllProductDetails = () => {
           <h3>Description</h3>
           <textarea
             name="description"
-            value={productDetails.description}
+            value={productDetails.description || ""}
             onChange={handleChange}
             placeholder="Description"
             style={{
@@ -91,7 +90,7 @@ const AllProductDetails = () => {
           <input
             type="text"
             name="category"
-            value={productDetails.category}
+            value={productDetails.category || ""}
             onChange={handleChange}
             placeholder="Category"
             style={{
@@ -104,7 +103,7 @@ const AllProductDetails = () => {
           <input
             type="number"
             name="price"
-            value={productDetails.price}
+            value={productDetails.price || ""}
             onChange={handleChange}
             placeholder="Price"
             style={{
@@ -119,7 +118,7 @@ const AllProductDetails = () => {
               <input
                 type="checkbox"
                 name="isBestSeller"
-                checked={productDetails.isBestSeller}
+                checked={productDetails.isBestSeller || false}
                 onChange={handleToggle}
               />
             </label>
@@ -128,7 +127,7 @@ const AllProductDetails = () => {
               <input
                 type="checkbox"
                 name="isNewArrival"
-                checked={productDetails.isNewArrival}
+                checked={productDetails.isNewArrival || false}
                 onChange={handleToggle}
               />
             </label>
@@ -137,7 +136,7 @@ const AllProductDetails = () => {
 
         <div style={{ display: "block" }}>
           <img
-            src={productDetails.mainImage}
+            src={productDetails.mainImage || ""}
             style={{ marginTop: 0, height: 350 }}
           />
           <div
@@ -148,7 +147,7 @@ const AllProductDetails = () => {
               marginTop: -30,
             }}
           >
-            {productDetails.additionalImages.map((image, index) => (
+            {(productDetails.additionalImages || []).map((image, index) => (
               <img
                 key={index}
                 src={image}
@@ -159,7 +158,7 @@ const AllProductDetails = () => {
           </div>
           <div
             style={{
-              marginTop: 20,
+              marginTop: 50,
               display: "flex",
               justifyContent: "space-evenly",
             }}

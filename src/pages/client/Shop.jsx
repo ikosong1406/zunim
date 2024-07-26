@@ -2,19 +2,39 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import ProductCard from "../../components/ProductCard";
-import products from "../../components/DummyData";
 import ProductFilter from "../../components/ProductFilter";
 import Modal from "../../components/Modal";
 import "../../styles/client/Shop.css";
 import { FaFilter } from "react-icons/fa6";
+import { fetchProducts } from "../../components/ProductData";
 
 const Shop = () => {
   const location = useLocation();
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const productsPerPage = 100;
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts(); // Fetch data from backend
+        setProducts(data); // Store data in state
+        setFilteredProducts(data); // Set initial filtered products
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const categories = [...new Set(products.map((product) => product.category))];
 
   const handleFilter = ({ category, minPrice, maxPrice }) => {
@@ -79,7 +99,7 @@ const Shop = () => {
       </div>
       <div className="homeDiv71">
         {currentProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
       <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>

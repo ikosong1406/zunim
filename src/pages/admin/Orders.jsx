@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Colors from "../../components/Colors";
 import { Link } from "react-router-dom";
-import ordersData from "../../components/OrderData";
+import { fetchOrders } from "../../components/OrdersData";
 import "../../styles/admin/Orders.css";
 import { FaEdit } from "react-icons/fa";
 
@@ -11,17 +11,37 @@ const Orders = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [statusFilter, setStatusFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadOrders = async () => {
+      try {
+        const data = await fetchOrders(); // Fetch data from backend
+        setOrders(data); // Store data in state
+        setFilteredOrders(data); // Initialize filteredOrders with the fetched data
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadOrders();
+  }, []);
 
   const ordersPerPage = 100;
 
   // Sorting orders by date (newest first)
   useEffect(() => {
-    const sortedOrders = [...ordersData].sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
-    );
-    setOrders(sortedOrders);
-    setFilteredOrders(sortedOrders);
-  }, []);
+    if (orders.length > 0) {
+      const sortedOrders = [...orders].sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      setOrders(sortedOrders);
+      setFilteredOrders(sortedOrders);
+    }
+  }, [orders]);
 
   // Filter orders based on status and date
   useEffect(() => {
@@ -59,7 +79,7 @@ const Orders = () => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: 600 }}>
       <div className="adHomeDiv1">
         <h1 style={{ color: Colors.ash, marginLeft: 20 }}>Orders List</h1>
       </div>
@@ -99,10 +119,10 @@ const Orders = () => {
           </thead>
           <tbody>
             {currentOrders.map((order) => (
-              <tr key={order.id}>
-                <td>{order.id.slice(-5)}</td>
+              <tr key={order._id}>
+                <td>{order._id.slice(-5)}</td>
                 <td>{order.date}</td>
-                <td>{`${order.firstName} ${order.lastName}`}</td>
+                <td>{`${order.customer.firstName} ${order.customer.lastName}`}</td>
                 <td>
                   <span
                     className={`status-dot ${
@@ -116,7 +136,7 @@ const Orders = () => {
                 <td>₦{order.total.toFixed(2)}</td>
                 <td>
                   <Link
-                    to={`/admin/orderDetails/${order.id}`}
+                    to={`/admin/orderDetails/${order._id}`}
                     state={{ order }}
                   >
                     <FaEdit

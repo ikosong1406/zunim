@@ -2,53 +2,100 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { CartContext } from "../../components/CartContext";
 import "../../styles/client/Product.css";
-import products from "../../components/DummyData";
+import { fetchProducts } from "../../components/ProductData"; // Adjust path if needed
 
 const Product = () => {
-  const { id } = useParams();
+  const { _id } = useParams();
   const location = useLocation();
-  const product = location.state?.product || products.find((p) => p.id === id);
+  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState(null); // Initialize as null
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
   const { addToCart, cartItems, updateQuantity } = useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
-  const [similarProducts, setSimilarProducts] = useState([]);
 
   useEffect(() => {
-    const cartItem = cartItems.find((item) => item.id === product.id);
-    if (cartItem) {
-      setQuantity(cartItem.quantity);
-    } else {
-      setQuantity(0);
-    }
-
-    // Find 5 random similar products
-    const findSimilarProducts = () => {
-      const filteredProducts = products.filter(
-        (p) => p.category === product.category && p.id !== product.id
-      );
-      const shuffledProducts = filteredProducts.sort(() => 0.5 - Math.random());
-      return shuffledProducts.slice(0, 3);
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts(); // Fetch data from backend
+        setProducts(data); // Store data in state
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
     };
-    setSimilarProducts(findSimilarProducts());
-  }, [cartItems, product.id, product.category]);
+
+    loadProducts();
+  }, []);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      const prod =
+        location.state?.product || products.find((p) => p._id === _id);
+      setProduct(prod);
+
+      // Find 5 random similar products
+      if (prod) {
+        const findSimilarProducts = () => {
+          const filteredProducts = products.filter(
+            (p) => p.category === prod.category && p._id !== prod._id
+          );
+          const shuffledProducts = filteredProducts.sort(
+            () => 0.5 - Math.random()
+          );
+          return shuffledProducts.slice(0, 3);
+        };
+        setSimilarProducts(findSimilarProducts());
+      }
+    }
+  }, [products, _id, location.state?.product]);
+
+  useEffect(() => {
+    if (product) {
+      const cartItem = cartItems.find((item) => item._id === product._id);
+      if (cartItem) {
+        setQuantity(cartItem.quantity);
+      } else {
+        setQuantity(0);
+      }
+    }
+  }, [product, cartItems]);
 
   const handleAddToCart = () => {
-    if (quantity === 0) {
+    if (quantity === 0 && product) {
       addToCart(product);
       setQuantity(1);
     }
   };
 
   const handleIncreaseQuantity = () => {
-    updateQuantity(product, quantity + 1);
-    setQuantity(quantity + 1);
+    if (product) {
+      updateQuantity(product, quantity + 1);
+      setQuantity(quantity + 1);
+    }
   };
 
   const handleDecreaseQuantity = () => {
-    if (quantity > 1) {
-      updateQuantity(product, quantity - 1);
-      setQuantity(quantity - 1);
+    if (product) {
+      if (quantity > 1) {
+        updateQuantity(product, quantity - 1);
+        setQuantity(quantity - 1);
+      } else if (quantity === 1) {
+        addToCart(product, 0);
+        setQuantity(0);
+      }
     }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   if (!product) {
     return <div>Product not found</div>;
@@ -72,14 +119,18 @@ const Product = () => {
               marginTop: -30,
             }}
           >
-            {product.additionalImages.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt="image"
-                style={{ width: "25%" }}
-              />
-            ))}
+            {product.additionalImages && product.additionalImages.length > 0 ? (
+              product.additionalImages.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Additional ${index}`}
+                  style={{ width: "25%" }}
+                />
+              ))
+            ) : (
+              <div>No additional images available</div>
+            )}
           </div>
         </div>
         <div className="product-info">
@@ -91,15 +142,19 @@ const Product = () => {
           <p className="product-category">{product.category}</p>
           <div className="product-colors">
             <h3 style={{ marginRight: 10, fontSize: 14 }}>Available colors:</h3>
-            {product.availableColors.map((color, index) => (
-              <span
-                key={index}
-                className="color"
-                style={{ backgroundColor: color }}
-              >
-                {color}
-              </span>
-            ))}
+            {product.availableColors && product.availableColors.length > 0 ? (
+              product.availableColors.map((color, index) => (
+                <span
+                  key={index}
+                  className="color"
+                  style={{ backgroundColor: color }}
+                >
+                  {color}
+                </span>
+              ))
+            ) : (
+              <div>No colors available</div>
+            )}
           </div>
           {quantity === 0 ? (
             <button className="add-to-cart-button" onClick={handleAddToCart}>
@@ -119,9 +174,9 @@ const Product = () => {
         <div className="similar-products">
           {similarProducts.map((similarProduct) => (
             <Link
-              to={`/product/${similarProduct.id}`}
+              to={`/product/${similarProduct._id}`}
               state={{ product: similarProduct }}
-              key={similarProduct.id}
+              key={similarProduct._id}
               className="product-card2"
             >
               <img

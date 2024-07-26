@@ -114,7 +114,7 @@ const App = () => {
                 <Route path="/signup" element={<Signup />} />
 
                 <Route
-                  path="/product/:id"
+                  path="/product/:_id"
                   element={
                     <Layout1>
                       <Product />
@@ -183,11 +183,11 @@ const App = () => {
                   <Route path="overview" element={<Overview />} />
                   <Route path="allProduct" element={<AllProduct />} />
                   <Route
-                    path="allProductDetails/:id"
+                    path="allProductDetails/:_id"
                     element={<AllProductDetails />}
                   />
                   <Route path="orders" element={<Orders />} />
-                  <Route path="orderDetails/:id" element={<OrderDetails />} />
+                  <Route path="orderDetails/:_id" element={<OrderDetails />} />
                   <Route path="addingProduct" element={<AddingProduct />} />
                 </Route>
               </Routes>

@@ -1,9 +1,28 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../../components/ProductCard";
-import products from "../../components/DummyData";
+import { fetchProducts } from "../../components/ProductData";
 import "../../styles/client/Shop.css";
 
 const New = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts(); // Fetch data from backend
+        setProducts(data); // Store data in state
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const newArrivals = products.filter((product) => product.isNewArrival);
 
   return (

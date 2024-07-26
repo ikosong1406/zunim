@@ -1,8 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import products from "../../components/DummyData";
+import { fetchProducts } from "../../components/ProductData";
 
 const Search = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts(); // Fetch data from backend
+        setProducts(data); // Store data in state
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
@@ -46,7 +65,9 @@ const Search = () => {
     } else if (suggestion.type === "brand") {
       navigate(`/shop`, { state: { brand: suggestion.name } });
     } else {
-      navigate(`/product/${suggestion.id}`, { state: { product: suggestion } });
+      navigate(`/product/${suggestion._id}`, {
+        state: { product: suggestion },
+      });
     }
   };
 
@@ -67,7 +88,7 @@ const Search = () => {
         <div className="suggestions-list" style={{ padding: 10 }}>
           {suggestions.map((suggestion) => (
             <h3
-              key={suggestion.id || suggestion.name}
+              key={suggestion._id || suggestion.name}
               onClick={() => handleSelectSuggestion(suggestion)}
             >
               {suggestion.name || suggestion.category || suggestion.brand}

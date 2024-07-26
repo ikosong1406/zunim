@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/client/Home.css";
 import wbottle from "../../images/bottle.jpeg";
@@ -12,11 +12,30 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 import { FaShippingFast } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import ProductCard from "../../components/ProductCard";
-import products from "../../components/DummyData";
 import Colors from "../../components/Colors";
 import Swiper from "../../components/Swiper";
+import { fetchProducts } from "../../components/ProductData";
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts(); // Fetch data from backend
+        setProducts(data); // Store data in state
+        setIsLoading(false);
+      } catch (error) {
+        setError("Failed to fetch products");
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const newArrivals = products
     .filter((product) => product.isNewArrival)
     .slice(0, 4);
