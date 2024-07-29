@@ -168,7 +168,7 @@ const Cart = () => {
             </select>
           </div>
 
-          <div style={{ paddingRight: 30, paddingLeft: 30 }}>
+          <div style={{ paddingRight: 20, paddingLeft: 17 }}>
             <div className="total-section">
               <div className="delivery">
                 <p>Standard Delivery(3 - 5 business days)</p>
