@@ -104,7 +104,7 @@ const AllProduct = () => {
             <span style={{ marginLeft: 5 }}>Filter</span>
           </h3>
         </div>
-        <div className="filter-container">
+        <div className="filter-container" style={{ marginLeft: 700 }}>
           <h3 className="filter-button" onClick={handleAddNewProduct}>
             <FaPlus style={{ alignSelf: "center" }} />
             <span style={{ marginLeft: 5 }}>Add New Product</span>

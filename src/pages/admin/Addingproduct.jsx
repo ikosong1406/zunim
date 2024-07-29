@@ -5,6 +5,8 @@ import Colors from "../../components/Colors";
 import { FaCamera } from "react-icons/fa";
 import axios from "axios";
 import api from "../../Api/BackendApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddingProduct = () => {
   const [productData, setProductData] = useState({
@@ -15,13 +17,17 @@ const AddingProduct = () => {
     category: "",
     price: "",
     mainImage: null,
+    mainImagePreview: null,
     additionalImages: [],
+    additionalImagePreviews: [],
     availableColors: [],
+    availableSize: [],
     isBestSeller: false,
     isNewArrival: false,
   });
 
   const [colorInput, setColorInput] = useState("");
+  const [sizeInput, setSizeInput] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -43,6 +49,7 @@ const AddingProduct = () => {
       setProductData((prev) => ({
         ...prev,
         mainImage: file,
+        mainImagePreview: URL.createObjectURL(file),
       }));
     }
   };
@@ -56,6 +63,12 @@ const AddingProduct = () => {
           ...prev.additionalImages,
           ...files.slice(0, 3 - prev.additionalImages.length),
         ],
+        additionalImagePreviews: [
+          ...prev.additionalImagePreviews,
+          ...files
+            .slice(0, 3 - prev.additionalImages.length)
+            .map((file) => URL.createObjectURL(file)),
+        ],
       }));
     }
   };
@@ -65,11 +78,15 @@ const AddingProduct = () => {
       setProductData((prev) => ({
         ...prev,
         mainImage: null,
+        mainImagePreview: null,
       }));
     } else {
       setProductData((prev) => ({
         ...prev,
         additionalImages: prev.additionalImages.filter(
+          (_, i) => i !== index - 1
+        ),
+        additionalImagePreviews: prev.additionalImagePreviews.filter(
           (_, i) => i !== index - 1
         ),
       }));
@@ -83,6 +100,16 @@ const AddingProduct = () => {
         availableColors: [...prev.availableColors, colorInput.trim()],
       }));
       setColorInput("");
+    }
+  };
+
+  const handleAddSize = () => {
+    if (sizeInput.trim()) {
+      setProductData((prev) => ({
+        ...prev,
+        availableSize: [...prev.availableSize, sizeInput.trim()],
+      }));
+      setSizeInput("");
     }
   };
 
@@ -100,6 +127,10 @@ const AddingProduct = () => {
       "availableColors",
       JSON.stringify(productData.availableColors)
     );
+    formData.append(
+      "availableColors",
+      JSON.stringify(productData.availableSize)
+    );
     if (productData.mainImage) {
       formData.append("mainImage", productData.mainImage);
     }
@@ -113,15 +144,35 @@ const AddingProduct = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Product saved", response.data);
-      navigate("/admin/allProduct");
+      toast.success("Product Added");
+      resetForm();
     } catch (error) {
       console.error("Error saving product", error);
     }
   };
 
+  const resetForm = () => {
+    setProductData({
+      name: "",
+      brand: "",
+      about: "",
+      description: "",
+      category: "",
+      price: "",
+      mainImage: null,
+      mainImagePreview: null,
+      additionalImages: [],
+      additionalImagePreviews: [],
+      availableColors: [],
+      availableSize: [],
+      isBestSeller: false,
+      isNewArrival: false,
+    });
+  };
+
   return (
     <div className="product-details-page">
+      <ToastContainer />
       <div className="adHomeDiv1">
         <h1 style={{ color: Colors.ash, marginLeft: 20 }}>Add New Product</h1>
       </div>
@@ -230,12 +281,59 @@ const AddingProduct = () => {
                 marginRight: 10,
               }}
             />
-            <button onClick={handleAddColor}>Add Color</button>
+            <button
+              onClick={handleAddColor}
+              style={{
+                padding: 10,
+                borderRadius: 10,
+                backgroundColor: "blue",
+                border: "none",
+                color: "white",
+                fontWeight: "600",
+              }}
+            >
+              Add
+            </button>
           </div>
           <div style={{ marginTop: 10 }}>
             {productData.availableColors.map((color, index) => (
               <span key={index} style={{ marginRight: 10 }}>
                 {color}
+              </span>
+            ))}
+          </div>
+          <h3>Available Size</h3>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input
+              type="text"
+              value={sizeInput}
+              onChange={(e) => setSizeInput(e.target.value)}
+              placeholder="Add Size"
+              style={{
+                border: "1px solid #2e3637",
+                borderRadius: 10,
+                cursor: "pointer",
+                marginRight: 10,
+              }}
+            />
+            <button
+              onClick={handleAddSize}
+              style={{
+                padding: 10,
+                borderRadius: 10,
+                backgroundColor: "blue",
+                border: "none",
+                color: "white",
+                fontWeight: "600",
+              }}
+            >
+              Add
+            </button>
+          </div>
+          <div style={{ marginTop: 10 }}>
+            {productData.availableSize.map((size, index) => (
+              <span key={index} style={{ marginRight: 10 }}>
+                {size}
               </span>
             ))}
           </div>
@@ -277,9 +375,9 @@ const AddingProduct = () => {
             }}
             onClick={() => document.getElementById("main-image-upload").click()}
           >
-            {productData.mainImage ? (
+            {productData.mainImagePreview ? (
               <img
-                src={productData.mainImage}
+                src={productData.mainImagePreview}
                 alt="Main"
                 style={{
                   width: "100%",
@@ -304,11 +402,10 @@ const AddingProduct = () => {
             style={{
               marginTop: 20,
               display: "flex",
-              // flexDirection: "column",
               gap: 10,
             }}
           >
-            {productData.additionalImages.map((image, index) => (
+            {productData.additionalImagePreviews.map((image, index) => (
               <div
                 key={index}
                 style={{
@@ -353,7 +450,7 @@ const AddingProduct = () => {
                 </button>
               </div>
             ))}
-            {productData.additionalImages.length < 3 && (
+            {productData.additionalImagePreviews.length < 3 && (
               <div
                 style={{
                   width: "32%",

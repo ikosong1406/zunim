@@ -12,7 +12,8 @@ const Product = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
-  const { addToCart, cartItems, updateQuantity } = useContext(CartContext);
+  const { addToCart, cartItems, updateQuantity, removeFromCart } =
+    useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
@@ -83,9 +84,18 @@ const Product = () => {
         updateQuantity(product, quantity - 1);
         setQuantity(quantity - 1);
       } else if (quantity === 1) {
-        addToCart(product, 0);
+        removeFromCart(product); // Use removeFromCart instead of addToCart
         setQuantity(0);
       }
+    }
+  };
+
+  const parseJSON = (jsonString, defaultValue) => {
+    try {
+      return JSON.parse(jsonString);
+    } catch (e) {
+      console.error("Failed to parse JSON", e);
+      return defaultValue;
     }
   };
 
@@ -129,7 +139,7 @@ const Product = () => {
                 />
               ))
             ) : (
-              <div>No additional images available</div>
+              <div> </div>
             )}
           </div>
         </div>
@@ -141,13 +151,29 @@ const Product = () => {
           <p className="product-descript">{product.description}</p>
           <p className="product-category">{product.category}</p>
           <div className="product-colors">
-            <h3 style={{ marginRight: 10, fontSize: 14 }}>Available colors:</h3>
+            <h3 style={{ marginRight: 10, fontSize: 14 }}>Available size:</h3>
             {product.availableColors && product.availableColors.length > 0 ? (
-              JSON.parse(product.availableColors).map((color, index) => (
+              parseJSON(product.availableColors[1], []).map((color, index) => (
                 <span
                   key={index}
                   className="color"
-                  style={{ backgroundColor: color }}
+                  style={{ fontWeight: "600" }}
+                >
+                  {color}
+                </span>
+              ))
+            ) : (
+              <div>No size available</div>
+            )}
+          </div>
+          <div className="product-colors">
+            <h3 style={{ marginRight: 10, fontSize: 14 }}>Available colors:</h3>
+            {product.availableColors && product.availableColors.length > 0 ? (
+              parseJSON(product.availableColors[0], []).map((color, index) => (
+                <span
+                  key={index}
+                  className="color"
+                  style={{ backgroundColor: color, fontWeight: "500" }}
                 >
                   {color}
                 </span>
