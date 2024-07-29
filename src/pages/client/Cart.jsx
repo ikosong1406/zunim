@@ -83,7 +83,6 @@ const Cart = () => {
               <tr>
                 <th>Product</th>
                 <th>Image</th>
-                <th>Details</th>
                 <th>Quantity</th>
                 <th>Sub Price</th>
                 <th>Delete</th>
@@ -99,17 +98,6 @@ const Cart = () => {
                       alt={item.name}
                       className="cart-product-image"
                     />
-                  </td>
-                  <td
-                    data-label="Color"
-                    style={{
-                      backgroundColor: item.selectedColor,
-                      fontWeight: "600",
-                      fontSize: 13,
-                      color: Colors.pink,
-                    }}
-                  >
-                    {item.selectedSize}
                   </td>
                   <td data-label="Quantity">
                     <button
