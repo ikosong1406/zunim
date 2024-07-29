@@ -15,6 +15,8 @@ const Product = () => {
   const { addToCart, cartItems, updateQuantity, removeFromCart } =
     useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -58,15 +60,19 @@ const Product = () => {
       const cartItem = cartItems.find((item) => item._id === product._id);
       if (cartItem) {
         setQuantity(cartItem.quantity);
+        setSelectedSize(cartItem.selectedSize);
+        setSelectedColor(cartItem.selectedColor);
       } else {
         setQuantity(0);
+        setSelectedSize("");
+        setSelectedColor("");
       }
     }
   }, [product, cartItems]);
 
   const handleAddToCart = () => {
     if (quantity === 0 && product) {
-      addToCart(product);
+      addToCart({ ...product, selectedSize, selectedColor });
       setQuantity(1);
     }
   };
@@ -156,8 +162,11 @@ const Product = () => {
               parseJSON(product.availableColors[1], []).map((color, index) => (
                 <span
                   key={index}
-                  className="color"
+                  className={`color ${
+                    selectedSize === color ? "selected" : ""
+                  }`}
                   style={{ fontWeight: "600" }}
+                  onClick={() => setSelectedSize(color)}
                 >
                   {color}
                 </span>
@@ -172,8 +181,11 @@ const Product = () => {
               parseJSON(product.availableColors[0], []).map((color, index) => (
                 <span
                   key={index}
-                  className="color"
+                  className={`color ${
+                    selectedColor === color ? "selected" : ""
+                  }`}
                   style={{ backgroundColor: color, fontWeight: "500" }}
+                  onClick={() => setSelectedColor(color)}
                 >
                   {color}
                 </span>

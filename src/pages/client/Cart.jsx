@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { CiTrash } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Colors from "../../components/Colors";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
@@ -68,7 +69,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="homeMain" style={{ minHeight: 750 }}>
+    <div className="homeMain">
       <ToastContainer />
       <h1 className="shop">Cart</h1>
       {cartItems.length === 0 ? (
@@ -82,6 +83,7 @@ const Cart = () => {
               <tr>
                 <th>Product</th>
                 <th>Image</th>
+                <th>Details</th>
                 <th>Quantity</th>
                 <th>Sub Price</th>
                 <th>Delete</th>
@@ -97,6 +99,17 @@ const Cart = () => {
                       alt={item.name}
                       className="cart-product-image"
                     />
+                  </td>
+                  <td
+                    data-label="Color"
+                    style={{
+                      backgroundColor: item.selectedColor,
+                      fontWeight: "600",
+                      fontSize: 13,
+                      color: Colors.pink,
+                    }}
+                  >
+                    {item.selectedSize}
                   </td>
                   <td data-label="Quantity">
                     <button
@@ -155,7 +168,7 @@ const Cart = () => {
             </select>
           </div>
 
-          <div style={{ paddingRight: 20, paddingLeft: 20 }}>
+          <div style={{ paddingRight: 30, paddingLeft: 30 }}>
             <div className="total-section">
               <div className="delivery">
                 <p>Standard Delivery(3 - 5 business days)</p>

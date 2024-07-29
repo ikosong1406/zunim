@@ -62,6 +62,10 @@
   border-radius: 4px;
 }
 
+.color.selected {
+  border: 2px solid var(--pink);
+}
+
 .add-to-cart-button {
   padding: 10px 20px;
   background-color: var(--dark);

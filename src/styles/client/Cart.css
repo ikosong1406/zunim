@@ -23,6 +23,18 @@ tr:nth-child(even) {
   background-color: rgba(128, 128, 128, 0.244);
 }
 
+th:nth-child(1),
+td:nth-child(1) {
+  /* Product column */
+  width: 25%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  /* Color column */
+  width: 5%;
+}
+
 tr:hover {
   background-color: rgba(128, 128, 128, 0.489);
 }
@@ -84,6 +96,7 @@ thead tr {
   border: 1px solid var(--dark);
   border-radius: 10px;
   margin-top: 30px;
+  width: 95%;
 }
 
 .delivery {
@@ -120,7 +133,7 @@ thead tr {
 
 .checkout-section input {
   display: block;
-  width: 90%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid var(--dark);

@@ -6,6 +6,7 @@ import { FaHome } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import { FaCartPlus } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { FaTruckFast } from "react-icons/fa6";
 import { CartContext } from "./CartContext";
 import Colors from "./Colors";
 
@@ -54,6 +55,13 @@ const BottomTabNavigator = () => {
         onClick={() => setShowNav(false)}
       >
         <FaUser className="icon" />
+      </NavLink>
+      <NavLink
+        to="/about"
+        className={({ isActive }) => (isActive ? "active" : "")}
+        onClick={() => setShowNav(false)}
+      >
+        <FaTruckFast className="icon" />
       </NavLink>
     </div>
   );
