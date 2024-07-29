@@ -3,6 +3,9 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import { CartContext } from "../../components/CartContext";
 import "../../styles/client/Product.css";
 import { fetchProducts } from "../../components/ProductData"; // Adjust path if needed
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ReactStars from "react-rating-stars-component";
 
 const Product = () => {
   const { _id } = useParams();
@@ -17,6 +20,8 @@ const Product = () => {
   const [quantity, setQuantity] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const [rating, setRating] = useState(5);
+  const [review, setReview] = useState("");
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -71,9 +76,26 @@ const Product = () => {
   }, [product, cartItems]);
 
   const handleAddToCart = () => {
+    if (
+      product.availableColors[1] &&
+      product.availableColors[1].length > 0 &&
+      !selectedSize
+    ) {
+      toast.error("Please select a size.");
+      return;
+    }
+    if (
+      product.availableColors[0] &&
+      product.availableColors[0].length > 0 &&
+      !selectedColor
+    ) {
+      toast.error("Please select a color.");
+      return;
+    }
     if (quantity === 0 && product) {
       addToCart({ ...product, selectedSize, selectedColor });
       setQuantity(1);
+      toast.success("Product added to cart!");
     }
   };
 
@@ -94,6 +116,21 @@ const Product = () => {
         setQuantity(0);
       }
     }
+  };
+
+  const handleRatingChange = (nextValue) => {
+    setRating(nextValue);
+  };
+
+  const handleSubmitReview = () => {
+    if (review.trim() === "") {
+      toast.error("Please enter a review.");
+      return;
+    }
+    // Submit the review
+    toast.success("Review submitted!");
+    setReview("");
+    setRating(0);
   };
 
   const parseJSON = (jsonString, defaultValue) => {
@@ -119,6 +156,7 @@ const Product = () => {
 
   return (
     <div className="homeMain">
+      <ToastContainer />
       <h1 className="shop">Product Details</h1>
       <div className="product-details">
         <div className="productImagediv">
@@ -206,6 +244,27 @@ const Product = () => {
             </div>
           )}
         </div>
+
+        {/* <div className="rating-section">
+          <h3>Rating: </h3>
+          <ReactStars
+            name="rate1"
+            starCount={5}
+            value={rating}
+            onStarClick={handleRatingChange}
+          />
+        </div>
+
+        <div className="review-section">
+          <textarea
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+            placeholder="Write your review here..."
+          />
+          <button onClick={handleSubmitReview} className="submit-review-button">
+            Submit Review
+          </button>
+        </div> */}
       </div>
       <div className="sim">
         <h2>Similar Products</h2>
