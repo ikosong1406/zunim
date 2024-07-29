@@ -18,6 +18,7 @@ import Checkout from "./pages/client/Checkout";
 import New from "./pages/client/New";
 import Best from "./pages/client/Best";
 import Search from "./pages/client/Search";
+import OrderTracking from "./pages/client/OrderTracking";
 import Terms from "./pages/client/Terms";
 import Privacy from "./pages/client/Privacy";
 import CartProvider from "./components/CartContext";
@@ -105,6 +106,14 @@ const App = () => {
                     element={
                       <Layout1>
                         <About />
+                      </Layout1>
+                    }
+                  />
+                  <Route
+                    path="tracking"
+                    element={
+                      <Layout1>
+                        <OrderTracking />
                       </Layout1>
                     }
                   />

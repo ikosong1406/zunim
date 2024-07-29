@@ -57,7 +57,7 @@ const BottomTabNavigator = () => {
         <FaUser className="icon" />
       </NavLink>
       <NavLink
-        to="/about"
+        to="/tracking"
         className={({ isActive }) => (isActive ? "active" : "")}
         onClick={() => setShowNav(false)}
       >
