@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../styles/admin/Allproduct.css";
 import Colors from "../../components/Colors";
+import axios from "axios";
+import api from "../../Api/BackendApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AllProductDetails = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const { product } = state || {};
 
   const [productDetails, setProductDetails] = useState({ ...product });
@@ -19,9 +24,41 @@ const AllProductDetails = () => {
     setProductDetails((prev) => ({ ...prev, [name]: checked }));
   };
 
-  const handleSave = () => {
-    // Save logic here
-    console.log("Product saved", productDetails);
+  const handleSave = async () => {
+    const data = {
+      productId: product._id,
+      name: productDetails.name,
+      about: productDetails.about,
+      description: productDetails.description,
+      price: Number(productDetails.price),
+      category: productDetails.category,
+      isBestSeller: productDetails.isBestSeller,
+      isNewArrival: productDetails.isNewArrival,
+    };
+
+    try {
+      // Replace with your backend API endpoint
+      const response = await axios.post(`${api}/updateProduct`, data);
+      toast.success("Product updated successfully!");
+    } catch (error) {
+      toast.error("Failed to update product. Please try again.");
+    }
+  };
+
+  const handleDelete = async () => {
+    const data = {
+      productId: product._id,
+    };
+
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        // Replace with your backend API endpoint
+        const response = await axios.post(`${api}/deleteProduct`, data);
+        navigate("/admin/allProduct");
+      } catch (error) {
+        toast.error("Failed to delete product. Please try again.");
+      }
+    }
   };
 
   if (!product) {
@@ -30,6 +67,7 @@ const AllProductDetails = () => {
 
   return (
     <div className="product-details-page">
+      <ToastContainer />
       <div className="adHomeDiv1">
         <h1 style={{ color: Colors.ash, marginLeft: 20 }}>Product Details</h1>
       </div>
@@ -175,7 +213,7 @@ const AllProductDetails = () => {
               Update
             </button>
             <button
-              onClick={handleSave}
+              onClick={handleDelete}
               style={{
                 backgroundColor: "red",
                 border: "none",

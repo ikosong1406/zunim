@@ -133,8 +133,8 @@ const Home = () => {
         <div className="homeDiv41"></div>
         <div className="homeDiv42">
           <h4>PROMOTION</h4>
-          <h2>Hurry up! 40% OFF</h2>
-          <h3>thousand of lifestyle products waiting for you</h3>
+          <h2>Hurry up! 10% OFF</h2>
+          <h3>Thousand of lifestyle products waiting for you</h3>
           <Link className="cta">Shop Now</Link>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "./CartContext";
 import "../styles/client/ProductCard.css";
 
@@ -7,6 +7,7 @@ const ProductCard = ({ product }) => {
   const { addToCart, cartItems, updateQuantity, removeFromCart } =
     useContext(CartContext);
   const [quantity, setQuantity] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cartItem = cartItems.find((item) => item._id === product._id);
@@ -18,10 +19,7 @@ const ProductCard = ({ product }) => {
   }, [cartItems, product._id]);
 
   const handleAddToCart = () => {
-    if (quantity === 0) {
-      addToCart(product);
-      setQuantity(1);
-    }
+    navigate(`/product/${product._id}`);
   };
 
   const handleIncreaseQuantity = () => {
