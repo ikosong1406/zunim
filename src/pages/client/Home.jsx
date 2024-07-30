@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/client/Home.css";
 import wbottle from "../../images/bottle.jpeg";
-import beads from "../../images/beads.jpeg";
 import men from "../../images/men.jpeg";
 import women from "../../images/women.jpeg";
 import phone from "../../images/phone.jpeg";
@@ -15,6 +14,10 @@ import ProductCard from "../../components/ProductCard";
 import Colors from "../../components/Colors";
 import Swiper from "../../components/Swiper";
 import { fetchProducts } from "../../components/ProductData";
+import zu1 from "../../images/zu1.jpg";
+import zu2 from "../../images/zu2.jpg";
+import zu3 from "../../images/zu3.jpg";
+import zu4 from "../../images/zu4.jpg";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -161,10 +164,10 @@ const Home = () => {
         <h3>@zunim.ecomerce</h3>
 
         <div className="homeDiv61">
-          <img src={beads} alt="beads" />
-          <img src={beads} alt="beads" />
-          <img src={beads} alt="beads" />
-          <img src={beads} alt="beads" />
+          <img src={zu1} alt="beads" />
+          <img src={zu2} alt="beads" />
+          <img src={zu3} alt="beads" />
+          <img src={zu4} alt="beads" />
         </div>
       </div>
     </div>

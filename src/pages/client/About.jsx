@@ -76,13 +76,13 @@ const About = () => {
             <FaShop className="icon" />
             <p>Address</p>
             <p style={{ textAlign: "center" }}>
-              1234 Market Street, Suite 200, San Francisco, CA 94103
+              Ignatius Ajuru University, Iwofe, Rivers State
             </p>
           </div>
           <div className="homeDiv51">
             <FaPhone className="icon" />
             <p>Contact Us</p>
-            <p style={{ textAlign: "center" }}>+234 7012571616</p>
+            <p style={{ textAlign: "center" }}>+234 903 009 8209</p>
           </div>
           <div className="homeDiv51">
             <MdEmail className="icon" />
