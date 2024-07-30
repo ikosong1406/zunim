@@ -23,18 +23,6 @@ tr:nth-child(even) {
   background-color: rgba(128, 128, 128, 0.244);
 }
 
-th:nth-child(1),
-td:nth-child(1) {
-  /* Product column */
-  width: 25%;
-}
-
-th:nth-child(3),
-td:nth-child(3) {
-  /* Color column */
-  width: 5%;
-}
-
 tr:hover {
   background-color: rgba(128, 128, 128, 0.489);
 }

@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { CartContext } from "../../components/CartContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import api from "../../Api/BackendApi";
 
 const Checkout = () => {
   const location = useLocation();
@@ -16,7 +18,7 @@ const Checkout = () => {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phoneNumber: "",
   });
 
   const [shippingAddress, setShippingAddress] = useState({
@@ -42,11 +44,10 @@ const Checkout = () => {
       !contactInfo.firstName ||
       !contactInfo.lastName ||
       !contactInfo.email ||
-      !contactInfo.phone ||
+      !contactInfo.phoneNumber ||
       !shippingAddress.street ||
       !shippingAddress.city ||
-      !shippingAddress.state ||
-      !shippingAddress.zipCode
+      !shippingAddress.state
     ) {
       toast.error("Please fill in all fields before proceeding to payment.");
       return;
@@ -60,13 +61,36 @@ const Checkout = () => {
       callback: (response) => {
         console.log(response);
         if (response.status === "success") {
-          clearCart();
-          navigate("/order", {
-            state: {
-              total: total || 0, // Ensure total is a number
-              reference: response.reference || "", // Ensure reference is a string
-            },
-          });
+          axios
+            .post(`${api}/createOrders`, {
+              firstName: contactInfo.firstName,
+              lastName: contactInfo.lastName,
+              email: contactInfo.email,
+              phoneNumber: contactInfo.phoneNumber,
+              street: shippingAddress.street,
+              city: shippingAddress.city,
+              state: shippingAddress.state,
+              zipCode: shippingAddress.zipCode,
+              specialNote: shippingAddress.specialNote,
+              products: cartItems,
+              deliveryFee,
+              subTotal: total - deliveryFee + discount,
+              discount,
+              total,
+              paymentReference: response.reference,
+            })
+            .then(() => {
+              clearCart();
+              navigate("/order", {
+                state: {
+                  total: total || 0, // Ensure total is a number
+                  reference: response.reference || "", // Ensure reference is a string
+                },
+              });
+            })
+            .catch((error) => {
+              toast.error("Failed to place order. Please try again.");
+            });
         } else {
           toast.error("Payment was not successful. Please try again.");
         }
@@ -106,9 +130,9 @@ const Checkout = () => {
           placeholder="Email Address"
         />
         <input
-          type="tel"
-          name="phone"
-          value={contactInfo.phone}
+          type="text"
+          name="phoneNumber"
+          value={contactInfo.phoneNumber}
           onChange={handleInputChange}
           placeholder="Phone Number"
         />
@@ -158,6 +182,7 @@ const Checkout = () => {
             <tr>
               <th>Product</th>
               <th>Quantity</th>
+              <th>Details</th>
               <th>Price</th>
             </tr>
           </thead>
@@ -166,6 +191,9 @@ const Checkout = () => {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
+                <td style={{ backgroundColor: item.selectedColor }}>
+                  {item.selectedSize}
+                </td>
                 <td>₦{(item.price * item.quantity).toFixed(2)}</td>
               </tr>
             ))}

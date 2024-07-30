@@ -221,7 +221,9 @@ const Orderdetails = () => {
               <thead>
                 <tr>
                   <th>Product</th>
+                  <th>Image</th>
                   <th>Quantity</th>
+                  <th>Details</th>
                   <th>Sub Price</th>
                 </tr>
               </thead>
@@ -229,10 +231,18 @@ const Orderdetails = () => {
                 {order.products.map((product, index) => (
                   <tr key={index}>
                     <td>{product.name}</td>
-                    <td>{product.quantity}</td>
                     <td>
-                      ₦{product.subPrice ? product.subPrice.toFixed(2) : "N/A"}
+                      <img
+                        src={product.mainImage}
+                        alt={product.name}
+                        className="cart-product-image"
+                      />
                     </td>
+                    <td>{product.quantity}</td>
+                    <td style={{ backgroundColor: product.selectedColor }}>
+                      {product.selectedSize}
+                    </td>
+                    <td>₦{(product.price * product.quantity).toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
