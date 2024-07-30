@@ -5,6 +5,10 @@ import Colors from "../../components/Colors";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { BiPrinter } from "react-icons/bi";
+import axios from "axios";
+import api from "../../Api/BackendApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Orderdetails = () => {
   const location = useLocation();
@@ -15,9 +19,19 @@ const Orderdetails = () => {
     setStatus(e.target.value);
   };
 
-  const handleSave = () => {
-    // Implement save logic here (e.g., API call)
-    console.log("Status saved:", status);
+  const handleSave = async () => {
+    const data = {
+      orderId: order._id,
+      status: status,
+    };
+
+    try {
+      // Replace with your backend API endpoint
+      const response = await axios.post(`${api}/updateOrders`, data);
+      toast.success("Order updated successfully!");
+    } catch (error) {
+      toast.error("Failed to update order. Please try again.");
+    }
   };
 
   const handlePrintReceipt = () => {
@@ -27,6 +41,7 @@ const Orderdetails = () => {
 
   return (
     <div style={{ padding: 20 }}>
+      <ToastContainer />
       <div className="adHomeDiv1">
         <h1
           style={{
