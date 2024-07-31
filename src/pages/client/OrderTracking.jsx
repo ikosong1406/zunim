@@ -41,7 +41,7 @@ const OrderTracking = () => {
         paddingLeft: 20,
         paddingRight: 20,
         paddingBottom: 30,
-        height: 830,
+        minHeight: 830,
       }}
     >
       <h1 className="shop">Order Tracking</h1>
