@@ -6,6 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import { FaCartPlus } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { FaTruckFast } from "react-icons/fa6";
 import { CartContext } from "./CartContext";
 
 const Header1 = ({ clicked, setClicked }) => {
@@ -54,6 +55,9 @@ const Header1 = ({ clicked, setClicked }) => {
         </NavLink>
         <NavLink to="/about">
           <FaUser className="ico11" />
+        </NavLink>
+        <NavLink to="/tracking">
+          <FaTruckFast className="ico11" />
         </NavLink>
       </div>
     </div>

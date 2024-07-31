@@ -61,9 +61,9 @@ const Search = () => {
 
   const handleSelectSuggestion = (suggestion) => {
     if (suggestion.type === "category") {
-      navigate(`/shop`, { state: { category: suggestion.name } });
+      navigate(`/shop?category=${encodeURIComponent(suggestion.name)}`);
     } else if (suggestion.type === "brand") {
-      navigate(`/shop`, { state: { brand: suggestion.name } });
+      navigate(`/shop?brand=${encodeURIComponent(suggestion.name)}`);
     } else {
       navigate(`/product/${suggestion._id}`, {
         state: { product: suggestion },

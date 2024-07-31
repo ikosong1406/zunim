@@ -30,7 +30,10 @@ const OrderTracking = () => {
   };
 
   return (
-    <div className="homeMain" style={{ paddingLeft: 20, paddingRight: 20 }}>
+    <div
+      className="homeMain"
+      style={{ paddingLeft: 20, paddingRight: 20, height: 830 }}
+    >
       <h1 className="shop">Order Tracking</h1>
       <form onSubmit={handleTrackOrder} className="order-tracking-form">
         <input

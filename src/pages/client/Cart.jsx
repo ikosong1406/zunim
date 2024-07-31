@@ -38,11 +38,28 @@ const Cart = () => {
       case "Adageorge":
         setDeliveryFee(1500);
         break;
+      case "Rumueme":
+      case "Rumuodara":
+      case "Old Aba Road":
+      case "Alakahia":
+      case "UST":
+      case "Rumuola":
+        setDeliveryFee(2000);
+        break;
       case "Choba":
-      case "Rukpokwu":
       case "Mile 1":
-      case "Rumola":
+      case "Garrison":
+      case "Golf Estate":
+      case "Odili Road":
+      case "GRA":
+      case "Sars Road":
+      case "East West Road":
         setDeliveryFee(2500);
+        break;
+      case "Igwuruta":
+      case "Rukpokwu":
+      case "Aluu":
+        setDeliveryFee(3000);
         break;
       default:
         setDeliveryFee(0);
@@ -143,15 +160,28 @@ const Cart = () => {
               style={{ marginTop: 10 }}
             >
               <option value="">Select Location</option>
-              <option value="Pickup">Pickup - ₦0</option>
-              <option value="Iwofe">Iwofe - ₦1500</option>
-              <option value="Agip">Agip - ₦1500</option>
-              <option value="Wimpy">Wimpy - ₦1500</option>
-              <option value="Adageorge">Adageorge - ₦1500</option>
-              <option value="Choba">Choba - ₦2500</option>
-              <option value="Rukpokwu">Rukpokwu - ₦2500</option>
-              <option value="Mile 1">Mile 1 - ₦2500</option>
-              <option value="Rumola">Rumola - ₦2500</option>
+              <option value="Pickup">Pickup</option>
+              <option value="Iwofe">Iwofe</option>
+              <option value="Agip">Agip</option>
+              <option value="Wimpy">Wimpy</option>
+              <option value="Adageorge">Adageorge</option>
+              <option value="UST">UST</option>
+              <option value="Alakahia">Alakahia</option>
+              <option value="Old Aba Road">Old Aba Road</option>
+              <option value="Rumuodara">Rumuodara</option>
+              <option value="Rumuola">Rumuola</option>
+              <option value="Rumueme">Rumueme</option>
+              <option value="Choba">Choba</option>
+              <option value="Mile 1">Mile 1</option>
+              <option value="Odili Road">Odili Road</option>
+              <option value="GRA">GRA</option>
+              <option value="Sars Road">Sars Road</option>
+              <option value="East West Road">East West Road</option>
+              <option value="Garrison">Garrison</option>
+              <option value="Golf Estate">Golf Estate</option>
+              <option value="Aluu">Aluu</option>
+              <option value="Rukpokwu">Rukpokwu</option>
+              <option value="Igwuruta">Igwuruta</option>
               {/* Add more locations as needed */}
             </select>
           </div>

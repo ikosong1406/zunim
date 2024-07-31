@@ -39,31 +39,40 @@ const Shop = () => {
 
   const handleFilter = ({ category, minPrice, maxPrice }) => {
     let filtered = products;
+
     if (category) {
-      filtered = filtered.filter((product) => product.category === category);
+      filtered = filtered.filter((product) =>
+        product.category.includes(category)
+      );
     }
+
     if (minPrice) {
       filtered = filtered.filter(
         (product) => product.price >= parseFloat(minPrice)
       );
     }
+
     if (maxPrice) {
       filtered = filtered.filter(
         (product) => product.price <= parseFloat(maxPrice)
       );
     }
+
     setFilteredProducts(filtered);
     setCurrentPage(1); // Reset to first page on filter change
   };
 
   useEffect(() => {
     const { category, minPrice, maxPrice } = queryString.parse(location.search);
+
     handleFilter({
-      category: category ? decodeURIComponent(category) : null,
+      category: category
+        ? decodeURIComponent(category)
+        : location.state?.category || null,
       minPrice,
       maxPrice,
     });
-  }, [location.search]);
+  }, [location.search, location.state, products]);
 
   // Get current products for the current page
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -98,9 +107,17 @@ const Shop = () => {
         </h3>
       </div>
       <div className="homeDiv71">
-        {currentProducts.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : currentProducts.length === 0 ? (
+          <p>No products found</p>
+        ) : (
+          currentProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))
+        )}
       </div>
       <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
         <div className="pagination-container">
