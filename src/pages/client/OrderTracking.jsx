@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
+import api from "../../Api/BackendApi";
 import "../../styles/client/OrderTracking.css"; // Make sure to create this CSS file
 
 const OrderTracking = () => {
@@ -18,9 +18,14 @@ const OrderTracking = () => {
     setIsLoading(true);
     setError(null);
 
+    const data = {
+      orderId: orderId,
+    };
+
     try {
-      const response = await axios.get(`/api/orders/${orderId}`);
+      const response = await axios.post(`${api}/tracking`, data);
       setOrderDetails(response.data);
+      console.log(response.data);
     } catch (err) {
       setError("Failed to fetch order details. Please check the order ID.");
       setOrderDetails(null);
@@ -32,7 +37,12 @@ const OrderTracking = () => {
   return (
     <div
       className="homeMain"
-      style={{ paddingLeft: 20, paddingRight: 20, height: 830 }}
+      style={{
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 30,
+        height: 830,
+      }}
     >
       <h1 className="shop">Order Tracking</h1>
       <form onSubmit={handleTrackOrder} className="order-tracking-form">
@@ -55,32 +65,84 @@ const OrderTracking = () => {
           </p>
           <p>
             <strong>Order Date:</strong>{" "}
-            {new Date(orderDetails.orderDate).toLocaleDateString()}
+            {new Date(orderDetails.date).toLocaleDateString()}
+          </p>
+          <h3>Customer Details:</h3>
+          <p>
+            <strong>Name:</strong> {orderDetails.customer.firstName}{" "}
+            {orderDetails.customer.lastName}
           </p>
           <p>
-            <strong>Customer Name:</strong> {orderDetails.customerName}
+            <strong>Email:</strong> {orderDetails.customer.email}
           </p>
           <p>
-            <strong>Shipping Address:</strong> {orderDetails.shippingAddress}
+            <strong>Phone Number:</strong> {orderDetails.customer.phoneNumber}
           </p>
-          <h3>Items:</h3>
+          <p>
+            <strong>Address:</strong> {orderDetails.customer.street},{" "}
+            {orderDetails.customer.city}, {orderDetails.customer.state},{" "}
+            {orderDetails.customer.zipCode}
+          </p>
+          <p>
+            <strong>Special Note:</strong> {orderDetails.customer.specialNote}
+          </p>
+          <h3>Products:</h3>
           <ul>
-            {orderDetails.items.map((item, index) => (
-              <li key={index}>
-                <p>
-                  <strong>Product:</strong> {item.name}
-                </p>
-                <p>
-                  <strong>Quantity:</strong> {item.quantity}
-                </p>
-                <p>
-                  <strong>Price:</strong> ₦{item.price.toFixed(2)}
-                </p>
-              </li>
-            ))}
+            {orderDetails.products && orderDetails.products.length > 0 ? (
+              orderDetails.products.map((product, index) => (
+                <li key={index}>
+                  <img
+                    src={product.mainImage}
+                    alt={product.name}
+                    style={{ width: 100, height: 100 }}
+                  />
+                  <p>
+                    <strong>Product:</strong> {product.name}
+                  </p>
+                  <p>
+                    <strong>Quantity:</strong> {product.quantity.$numberInt}
+                  </p>
+                  <p>
+                    <strong>Price:</strong> ₦
+                    {typeof product.price === "number"
+                      ? `₦${product.price.toFixed(2)}`
+                      : "N/A"}
+                  </p>
+                  <p>
+                    <strong>Size:</strong> {product.selectedSize}
+                  </p>
+                  <p>
+                    <strong>Color:</strong> {product.selectedColor}
+                  </p>
+                </li>
+              ))
+            ) : (
+              <p>No products found.</p>
+            )}
           </ul>
           <p>
-            <strong>Total Price:</strong> ₦{orderDetails.totalPrice.toFixed(2)}
+            <strong>Subtotal:</strong> ₦
+            {typeof orderDetails.subtotal === "number"
+              ? `₦${orderDetails.subtotal.toFixed(2)}`
+              : "N/A"}
+          </p>
+          <p>
+            <strong>Discount:</strong> ₦
+            {typeof orderDetails.discount === "number"
+              ? `₦${orderDetails.discount.toFixed(2)}`
+              : "N/A"}
+          </p>
+          <p>
+            <strong>Delivery Fee:</strong> ₦
+            {typeof orderDetails.deliveryFee === "number"
+              ? `₦${orderDetails.deliveryFee.toFixed(2)}`
+              : "N/A"}
+          </p>
+          <p>
+            <strong>Total Price:</strong> ₦
+            {typeof orderDetails.total === "number"
+              ? `₦${orderDetails.total.toFixed(2)}`
+              : "N/A"}
           </p>
         </div>
       )}
