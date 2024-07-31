@@ -105,7 +105,7 @@ const OrderTracking = () => {
                   <p>
                     <strong>Price:</strong> ₦
                     {typeof product.price === "number"
-                      ? `₦${product.price.toFixed(2)}`
+                      ? `${product.price.toFixed(2)}`
                       : "N/A"}
                   </p>
                   <p>
@@ -123,25 +123,25 @@ const OrderTracking = () => {
           <p>
             <strong>Subtotal:</strong> ₦
             {typeof orderDetails.subtotal === "number"
-              ? `₦${orderDetails.subtotal.toFixed(2)}`
+              ? `${orderDetails.subtotal.toFixed(2)}`
               : "N/A"}
           </p>
           <p>
             <strong>Discount:</strong> ₦
             {typeof orderDetails.discount === "number"
-              ? `₦${orderDetails.discount.toFixed(2)}`
+              ? `${orderDetails.discount.toFixed(2)}`
               : "N/A"}
           </p>
           <p>
             <strong>Delivery Fee:</strong> ₦
             {typeof orderDetails.deliveryFee === "number"
-              ? `₦${orderDetails.deliveryFee.toFixed(2)}`
+              ? `${orderDetails.deliveryFee.toFixed(2)}`
               : "N/A"}
           </p>
           <p>
             <strong>Total Price:</strong> ₦
             {typeof orderDetails.total === "number"
-              ? `₦${orderDetails.total.toFixed(2)}`
+              ? `${orderDetails.total.toFixed(2)}`
               : "N/A"}
           </p>
         </div>
