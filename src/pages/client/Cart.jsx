@@ -44,6 +44,7 @@ const Cart = () => {
       case "Alakahia":
       case "UST":
       case "Rumuola":
+      case "Warri/Benin(Pick Up)":
         setDeliveryFee(2000);
         break;
       case "Choba":
@@ -60,6 +61,59 @@ const Cart = () => {
       case "Rukpokwu":
       case "Aluu":
         setDeliveryFee(3000);
+        break;
+      case "Kaduna(Pick Up)":
+      case "Minna(Pick Up)":
+      case "Jos(Pick Up)":
+        setDeliveryFee(3500);
+        break;
+      case "South West(Pick Up)":
+        setDeliveryFee(3000);
+        break;
+      case "South West(Door Delivery)":
+        setDeliveryFee(5500);
+        break;
+      case "South South(Pick Up)":
+        setDeliveryFee(2000);
+        break;
+      case "South South(Door Delivery)":
+        setDeliveryFee(5000);
+        break;
+      case "South East(Pick Up)":
+        setDeliveryFee(2500);
+        break;
+      case "South East(Door Delivery)":
+        setDeliveryFee(5000);
+        break;
+      case "Abuja(Pick Up)":
+        setDeliveryFee(3000);
+        break;
+      case "Abuja(Door Delivery)":
+        setDeliveryFee(5500);
+        break;
+      case "Ajah/Sango(Pick Up)":
+        setDeliveryFee(3500);
+        break;
+      case "Ajah/Sango(Door Delivery)":
+        setDeliveryFee(6000);
+        break;
+      case "Ejigbo/Ikorodu(Pick Up)":
+        setDeliveryFee(3500);
+        break;
+      case "Ejigbo/Ikorodu(Door Delivery)":
+        setDeliveryFee(6000);
+        break;
+      case "Enu-ezike/Afikpo(Pick Up)":
+        setDeliveryFee(3500);
+        break;
+      case "Enu-ezike/Afikpo(Door Delivery)":
+        setDeliveryFee(6000);
+        break;
+      case "Abakpa/Gariki(Pick Up)":
+        setDeliveryFee(3500);
+        break;
+      case "Abakpa/Gariki(Door Delivery)":
+        setDeliveryFee(6000);
         break;
       default:
         setDeliveryFee(0);
@@ -182,7 +236,46 @@ const Cart = () => {
               <option value="Aluu">Aluu</option>
               <option value="Rukpokwu">Rukpokwu</option>
               <option value="Igwuruta">Igwuruta</option>
-              {/* Add more locations as needed */}
+              <option value="South South(Door Delivery)">
+                South South(Door Delivery)
+              </option>
+              <option value="South South(Pick Up)">South South(Pick Up)</option>
+              <option value="South East(Door Delivery)">
+                South East(Door Delivery)
+              </option>
+              <option value="South East(Pick Up)">South East(Pick Up)</option>
+              <option value="South West(Door Delivery)">
+                South West(Door Delivery)
+              </option>
+              <option value="South West(Pick Up)">South West(Pick Up)</option>
+              <option value="Abuja(Door Delivery)">Abuja(Door Delivery)</option>
+              <option value="Abuja(Pick Up)">Abuja(Pick Up)</option>
+              <option value="Ajah/Sango(Door Delivery)">
+                Ajah/Sango(Door Delivery)
+              </option>
+              <option value="Ajah/Sango(Pick Up)">Ajah/Sango(Pick Up)</option>
+              <option value="Ejigbo/Ikorodu(Door Delivery)">
+                Ejigbo/Ikorodu(Door Delivery)
+              </option>
+              <option value="Ejigbo/Ikorodu(Pick Up)">
+                Ejigbo/Ikorodu(Pick Up)
+              </option>
+              <option value="Enu-ezike/Afikpo(Door Delivery)">
+                Enu-ezike/Afikpo(Door Delivery)
+              </option>
+              <option value="Enu-ezike/Afikpo(Pick Up)">
+                Enu-ezike/Afikpo(Pick Up)
+              </option>
+              <option value="Abakpa/Gariki(Door Delivery)">
+                Abakpa/Gariki(Door Delivery)
+              </option>
+              <option value="Abakpa/Gariki(Pick Up)">
+                Abakpa/Gariki(Pick Up)
+              </option>
+              <option value="Warri/Benin(Pick Up)">Warri/Benin(Pick Up)</option>
+              <option value="Kaduna(Pick Up)">Kaduna(Pick Up)</option>
+              <option value="Minna(Pick Up)">Minna(Pick Up)</option>
+              <option value="Jos(Pick Up)">Jos(Pick Up)</option>
             </select>
           </div>
 
