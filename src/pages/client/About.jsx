@@ -12,19 +12,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const About = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [subject, setSubject] = useState();
-  const [message, setMessage] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
 
     const data = {
-      name: name,
-      email: email,
-      subject: subject,
-      message: message,
+      name,
+      email,
+      subject,
+      message,
     };
 
     try {
@@ -97,59 +97,57 @@ const About = () => {
           <div className="homeDiv51">
             <MdEmail className="icon" />
             <p>Message Us</p>
-            <p style={{ textAlign: "center" }}>Support@zunim.com.ng</p>
+            <p style={{ textAlign: "center" }}>support@zunim.com.ng</p>
           </div>
         </div>
 
         <div className="aboutDiv21">
-          <div className="contactDiv11">
-            <div className="contactDiv111">
-              <input
-                placeholder="Name"
-                type="text"
-                name="name"
-                onChange={(event) => {
-                  setName(event.target.value);
-                }}
-                required
-              />
-              <input
-                placeholder="Email"
-                type="email"
-                name="email"
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-                required
-              />
+          <form className="contactDiv11" onSubmit={handleSubmit}>
+            <div>
+              <div className="contactDiv111">
+                <input
+                  placeholder="Name"
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  required
+                />
+                <input
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="contactDiv112">
+                <input
+                  placeholder="Subject"
+                  type="text"
+                  name="subject"
+                  value={subject}
+                  onChange={(event) => setSubject(event.target.value)}
+                  required
+                />
+              </div>
+              <div className="contactDiv113">
+                <textarea
+                  placeholder="Message"
+                  name="message"
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  required
+                ></textarea>
+              </div>
+              <div className="contactDiv114">
+                <button className="flat-button" type="submit">
+                  Submit
+                </button>
+              </div>
             </div>
-            <div className="contactDiv112">
-              <input
-                placeholder="Subject"
-                type="text"
-                name="subject"
-                onChange={(event) => {
-                  setSubject(event.target.value);
-                }}
-                required
-              />
-            </div>
-            <div className="contactDiv113">
-              <textarea
-                placeholder="Message"
-                name="message"
-                onChange={(event) => {
-                  setMessage(event.target.value);
-                }}
-                required
-              ></textarea>
-            </div>
-            <div className="contactDiv114">
-              <button className="flat-button" onClick={handleSubmit}>
-                Submit
-              </button>
-            </div>
-          </div>
+          </form>
 
           <MapContainer
             center={[4.804597, 6.932498]}
