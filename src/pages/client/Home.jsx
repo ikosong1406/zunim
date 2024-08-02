@@ -69,7 +69,7 @@ const Home = () => {
             </div>
             <p>Men Fashion</p>
           </div>
-          <div onClick={() => handleCategoryClick("Beauty & Personal Care")}>
+          <div onClick={() => handleCategoryClick("Beauty & Personal care")}>
             <div className="homeDiv321">
               <img src={wbottle} alt="bottle" />
             </div>
