@@ -6,6 +6,8 @@ import { FaShop } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import api from "../../Api/BackendApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,24 +17,29 @@ const About = () => {
   const [subject, setSubject] = useState();
   const [message, setMessage] = useState();
 
-  // const userCollectionRef = collection(db, "contactdata");
+  const handleSubmit = async () => {
+    const data = {
+      name: name,
+      email: email,
+      subject: subject,
+      message: message,
+    };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
+    try {
+      const response = await axios.post(`${api}/sendMail`, data);
+      toast.success("Form Submited");
+      resetForm();
+    } catch (error) {
+      console.error("Error saving product", error);
+    }
+  };
 
-  //   addDoc(userCollectionRef, {
-  //     name: name,
-  //     email: email,
-  //     subject: subject,
-  //     message: message,
-  //   })
-  //     .then(() => {
-  //       alert("form submitted Successfully");
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message);
-  //     });
-  // };
+  const resetForm = () => {
+    setName("");
+    setEmail("");
+    setSubject("");
+    setMessage("");
+  };
 
   const mapRef = useRef(null);
 
@@ -135,7 +142,9 @@ const About = () => {
               ></textarea>
             </div>
             <div className="contactDiv114">
-              <button className="flat-button">Submit</button>
+              <button className="flat-button" onClick={handleSubmit}>
+                Submit
+              </button>
             </div>
           </div>
 
