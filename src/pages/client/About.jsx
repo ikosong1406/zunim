@@ -17,7 +17,9 @@ const About = () => {
   const [subject, setSubject] = useState();
   const [message, setMessage] = useState();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+
     const data = {
       name: name,
       email: email,
@@ -27,10 +29,11 @@ const About = () => {
 
     try {
       const response = await axios.post(`${api}/sendMail`, data);
-      toast.success("Form Submited");
+      toast.success("Form Submitted");
       resetForm();
     } catch (error) {
-      console.error("Error saving product", error);
+      console.error("Error sending form", error);
+      toast.error("Failed to submit form");
     }
   };
 
