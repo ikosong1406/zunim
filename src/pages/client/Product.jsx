@@ -6,6 +6,7 @@ import { fetchProducts } from "../../components/ProductData"; // Adjust path if 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactStars from "react-rating-stars-component";
+import ImageModal from "../../components/ImageModal";
 
 const Product = () => {
   const { _id } = useParams();
@@ -22,6 +23,8 @@ const Product = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [rating, setRating] = useState(5);
   const [review, setReview] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [modalImage, setModalImage] = useState("");
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -142,6 +145,16 @@ const Product = () => {
     }
   };
 
+  const handleImageClick = (image) => {
+    setModalImage(image);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setModalImage("");
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -164,6 +177,7 @@ const Product = () => {
             src={product.mainImage}
             alt={product.name}
             className="product-image"
+            onClick={() => handleImageClick(product.mainImage)}
           />
           <div
             style={{
@@ -179,7 +193,8 @@ const Product = () => {
                   key={index}
                   src={image}
                   alt={`Additional ${index}`}
-                  style={{ width: "25%" }}
+                  style={{ width: "25%", cursor: "pointer" }}
+                  onClick={() => handleImageClick(image)}
                 />
               ))
             ) : (
@@ -287,6 +302,9 @@ const Product = () => {
           ))}
         </div>
       </div>
+      {showModal && (
+        <ImageModal imageUrl={modalImage} onClose={handleCloseModal} />
+      )}
     </div>
   );
 };
