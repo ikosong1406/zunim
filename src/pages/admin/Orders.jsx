@@ -85,24 +85,33 @@ const Orders = () => {
       </div>
 
       <div className="filter-container">
-        <label>
-          Status:
-          <input
-            type="text"
+        <div>
+          <p>Status:</p>
+          <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            placeholder="Filter by status"
-          />
-        </label>
-        <label>
-          Date:
+            style={{
+              padding: 10,
+              borderRadius: 5,
+              backgroundColor: "transparent",
+              border: "1px solid #2e3637",
+            }}
+          >
+            <option value="">All</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
+        <div>
+          <p>Date:</p>
           <input
             type="date"
             value={dateFilter}
             onChange={(e) => setDateFilter(e.target.value)}
             placeholder="Filter by date"
           />
-        </label>
+        </div>
       </div>
 
       <div className="table-container">

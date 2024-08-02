@@ -98,7 +98,8 @@ const Orderdetails = () => {
                   onChange={handleStatusChange}
                   style={{ padding: 5, marginLeft: 10 }}
                 >
-                  <option value="pending">Pending</option>
+                  <option value="pending">Processing</option>
+                  <option value="shipped">Shipped</option>
                   <option value="delivered">Delivered</option>
                 </select>
               </label>

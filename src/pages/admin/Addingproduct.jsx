@@ -15,6 +15,7 @@ const AddingProduct = () => {
     about: "",
     description: "",
     category: "",
+    vendor: "",
     price: "",
     mainImage: null,
     mainImagePreview: null,
@@ -28,6 +29,7 @@ const AddingProduct = () => {
 
   const [colorInput, setColorInput] = useState("");
   const [sizeInput, setSizeInput] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -119,7 +121,8 @@ const AddingProduct = () => {
     formData.append("brand", productData.brand);
     formData.append("about", productData.about);
     formData.append("description", productData.description);
-    formData.append("category", productData.category);
+    formData.append("category", selectedCategory);
+    formData.append("vendor", productData.vendor);
     formData.append("price", productData.price);
     formData.append("isBestSeller", productData.isBestSeller);
     formData.append("isNewArrival", productData.isNewArrival);
@@ -158,6 +161,7 @@ const AddingProduct = () => {
       about: "",
       description: "",
       category: "",
+      vendor: "",
       price: "",
       mainImage: null,
       mainImagePreview: null,
@@ -168,6 +172,7 @@ const AddingProduct = () => {
       isBestSeller: false,
       isNewArrival: false,
     });
+    setSelectedCategory("");
   };
 
   return (
@@ -242,12 +247,39 @@ const AddingProduct = () => {
             }}
           ></textarea>
           <h3>Category</h3>
+          <select
+            name="category"
+            value={selectedCategory}
+            onChange={(e) => {
+              setSelectedCategory(e.target.value);
+              setProductData((prev) => ({ ...prev, category: e.target.value }));
+            }}
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+              padding: 10,
+              backgroundColor: "transparent",
+              width: "95%",
+            }}
+          >
+            <option value="Men Fashion">Men Fashion</option>
+            <option value="Beauty & Personal care">
+              Beauty & Personal care
+            </option>
+            <option value="Kitchen & Dinning">Kitchen & Dinning</option>
+            <option value="Women Fashion">Women Fashion</option>
+            <option value="Phone Accessories">Phone Accessories</option>
+            <option value="Interior Decoration">Interior Decoration</option>
+            {/* Add more categories as needed */}
+          </select>
+          <h3>Vendor</h3>
           <input
             type="text"
-            name="category"
-            value={productData.category}
+            name="vendor"
+            value={productData.vendor}
             onChange={handleChange}
-            placeholder="Category"
+            placeholder="Vendor"
             style={{
               border: "1px solid #2e3637",
               borderRadius: 10,
