@@ -32,6 +32,7 @@ const AllProductDetails = () => {
       description: productDetails.description,
       price: Number(productDetails.price),
       category: productDetails.category,
+      vendor: productDetails.vendor,
       isBestSeller: productDetails.isBestSeller,
       isNewArrival: productDetails.isNewArrival,
     };
@@ -129,6 +130,19 @@ const AllProductDetails = () => {
             type="text"
             name="category"
             value={productDetails.category || ""}
+            onChange={handleChange}
+            placeholder="Category"
+            style={{
+              border: "1px solid #2e3637",
+              borderRadius: 10,
+              cursor: "pointer",
+            }}
+          />
+          <h3>Vendor</h3>
+          <input
+            type="text"
+            name="category"
+            value={productDetails.vendor || ""}
             onChange={handleChange}
             placeholder="Category"
             style={{
