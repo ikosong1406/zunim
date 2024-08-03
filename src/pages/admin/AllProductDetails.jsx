@@ -191,7 +191,7 @@ const AllProductDetails = () => {
             src={productDetails.mainImage || ""}
             style={{ marginTop: 0, height: 350 }}
           />
-          <div
+          {/* <div
             style={{
               display: "flex",
               width: "100%",
@@ -207,7 +207,7 @@ const AllProductDetails = () => {
                 style={{ width: "25%" }}
               />
             ))}
-          </div>
+          </div> */}
           <div
             style={{
               marginTop: 50,

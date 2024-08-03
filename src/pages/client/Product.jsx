@@ -80,16 +80,16 @@ const Product = () => {
 
   const handleAddToCart = () => {
     if (
-      product.availableColors[1] &&
-      product.availableColors[1].length > 0 &&
+      product.availableSize &&
+      product.availableSize.length > 0 &&
       !selectedSize
     ) {
       toast.error("Please select a size.");
       return;
     }
     if (
-      product.availableColors[0] &&
-      product.availableColors[0].length > 0 &&
+      product.availableColors &&
+      product.availableColors.length > 0 &&
       !selectedColor
     ) {
       toast.error("Please select a color.");
@@ -211,17 +211,15 @@ const Product = () => {
           <p className="product-category">{product.category}</p>
           <div className="product-colors">
             <h3 style={{ marginRight: 10, fontSize: 14 }}>Available size:</h3>
-            {product.availableColors && product.availableColors.length > 0 ? (
-              parseJSON(product.availableColors[1], []).map((color, index) => (
+            {product.availableSize && product.availableSize.length > 0 ? (
+              parseJSON(product.availableSize, []).map((size, index) => (
                 <span
                   key={index}
-                  className={`color ${
-                    selectedSize === color ? "selected" : ""
-                  }`}
+                  className={`color ${selectedSize === size ? "selected" : ""}`}
                   style={{ fontWeight: "600" }}
-                  onClick={() => setSelectedSize(color)}
+                  onClick={() => setSelectedSize(size)}
                 >
-                  {color}
+                  {size}
                 </span>
               ))
             ) : (

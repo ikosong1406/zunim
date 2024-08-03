@@ -29,7 +29,6 @@ const AddingProduct = () => {
 
   const [colorInput, setColorInput] = useState("");
   const [sizeInput, setSizeInput] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -118,10 +117,10 @@ const AddingProduct = () => {
   const handleSave = async () => {
     const formData = new FormData();
     formData.append("name", productData.name);
-    formData.append("brand", productData.brand);
+    formData.append("brand", productData.brand); // Ensure 'brand' is used consistently
     formData.append("about", productData.about);
     formData.append("description", productData.description);
-    formData.append("category", selectedCategory);
+    formData.append("category", productData.category); // Ensure 'category' is set
     formData.append("vendor", productData.vendor);
     formData.append("price", productData.price);
     formData.append("isBestSeller", productData.isBestSeller);
@@ -129,14 +128,13 @@ const AddingProduct = () => {
     formData.append(
       "availableColors",
       JSON.stringify(productData.availableColors)
-    );
-    formData.append(
-      "availableColors",
-      JSON.stringify(productData.availableSize)
-    );
+    ); // Correct field name
+    formData.append("availableSize", JSON.stringify(productData.availableSize)); // Correct field name
+
     if (productData.mainImage) {
       formData.append("mainImage", productData.mainImage);
     }
+
     productData.additionalImages.forEach((image) => {
       formData.append("additionalImages", image);
     });
@@ -151,6 +149,7 @@ const AddingProduct = () => {
       resetForm();
     } catch (error) {
       console.error("Error saving product", error);
+      toast.error("Error saving product");
     }
   };
 
@@ -172,7 +171,6 @@ const AddingProduct = () => {
       isBestSeller: false,
       isNewArrival: false,
     });
-    setSelectedCategory("");
   };
 
   return (
@@ -220,8 +218,8 @@ const AddingProduct = () => {
           <h3>Brand Name</h3>
           <input
             type="text"
-            name="brandName"
-            value={productData.brandName}
+            name="brand"
+            value={productData.brand}
             onChange={handleChange}
             placeholder="Brand Name"
             style={{
@@ -247,32 +245,18 @@ const AddingProduct = () => {
             }}
           ></textarea>
           <h3>Category</h3>
-          <select
+          <input
+            type="text"
             name="category"
-            value={selectedCategory}
-            onChange={(e) => {
-              setSelectedCategory(e.target.value);
-              setProductData((prev) => ({ ...prev, category: e.target.value }));
-            }}
+            value={productData.category}
+            onChange={handleChange}
+            placeholder="Vendor"
             style={{
               border: "1px solid #2e3637",
               borderRadius: 10,
               cursor: "pointer",
-              padding: 10,
-              backgroundColor: "transparent",
-              width: "95%",
             }}
-          >
-            <option value="Men Fashion">Men Fashion</option>
-            <option value="Beauty & Personal care">
-              Beauty & Personal care
-            </option>
-            <option value="Kitchen & Dinning">Kitchen & Dinning</option>
-            <option value="Women Fashion">Women Fashion</option>
-            <option value="Phone Accessories">Phone Accessories</option>
-            <option value="Interior Decoration">Interior Decoration</option>
-            {/* Add more categories as needed */}
-          </select>
+          />
           <h3>Vendor</h3>
           <input
             type="text"
