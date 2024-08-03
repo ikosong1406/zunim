@@ -25,7 +25,10 @@ const Overview = () => {
     loadOrders();
   }, []);
 
-  const pendingOrders = orders.filter((order) => order.status === "pending");
+  const processingOrders = orders.filter(
+    (order) => order.status === "processing"
+  );
+  const shippedOrders = orders.filter((order) => order.status === "shipped");
   const deliveredOrders = orders.filter(
     (order) => order.status === "delivered"
   );
@@ -53,8 +56,23 @@ const Overview = () => {
         </div>
         <div className="adHomeDiv21">
           <div className="adHome211">
-            <p style={{ color: "gray", fontWeight: 500 }}>Pending Orders</p>
-            <h2 style={{ color: Colors.ash }}>{pendingOrders.length}</h2>
+            <p style={{ color: "gray", fontWeight: 500 }}>Processing Orders</p>
+            <h2 style={{ color: Colors.ash }}>{processingOrders.length}</h2>
+          </div>
+          <FaShoppingBag
+            style={{
+              fontSize: 30,
+              padding: 5,
+              backgroundColor: "yellow",
+              color: Colors.dark,
+              borderRadius: 10,
+            }}
+          />
+        </div>
+        <div className="adHomeDiv21">
+          <div className="adHome211">
+            <p style={{ color: "gray", fontWeight: 500 }}>Shipped Orders</p>
+            <h2 style={{ color: Colors.ash }}>{shippedOrders.length}</h2>
           </div>
           <FaShoppingBag
             style={{
