@@ -161,7 +161,14 @@ const Home = () => {
         <h4>NEWSFEED</h4>
         <h2>instagram</h2>
         <h3>follow us on social media for more discount and promotion</h3>
-        <h3>@zunim.ecomerce</h3>
+        <a
+          href="https://www.instagram.com/zunim.ecomerce?igsh=MWZtOW9zenRsNHUzaA=="
+          style={{ textDecoration: "none", color: Colors.dark }}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h3>@zunim.ecomerce</h3>
+        </a>
 
         <div className="homeDiv61">
           <img src={zu1} alt="beads" />

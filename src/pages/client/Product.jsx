@@ -79,26 +79,32 @@ const Product = () => {
   }, [product, cartItems]);
 
   const handleAddToCart = () => {
-    if (
-      product.availableSize &&
-      product.availableSize.length > 0 &&
-      !selectedSize
-    ) {
-      toast.error("Please select a size.");
-      return;
-    }
-    if (
-      product.availableColors &&
-      product.availableColors.length > 0 &&
-      !selectedColor
-    ) {
-      toast.error("Please select a color.");
-      return;
-    }
-    if (quantity === 0 && product) {
-      addToCart({ ...product, selectedSize, selectedColor });
-      setQuantity(1);
-      toast.success("Product added to cart!");
+    if (product) {
+      // Check for available size
+      if (
+        product.availableSize &&
+        product.availableSize.length > 0 &&
+        !selectedSize
+      ) {
+        toast.error("Please select a size.");
+        return;
+      }
+
+      // Check for available color only if there are color options
+      if (product.availableColors && product.availableColors.length > 0) {
+        if (!selectedColor) {
+          toast.error("Please select a color.");
+          return;
+        }
+      }
+
+      // Check quantity
+      if (quantity === 0) {
+        // Add product to cart with selected size and color
+        addToCart({ ...product, selectedSize, selectedColor });
+        setQuantity(1);
+        toast.success("Product added to cart!");
+      }
     }
   };
 
@@ -294,7 +300,7 @@ const Product = () => {
                 alt={similarProduct.name}
                 className="product-image2"
               />
-              <h3>{similarProduct.name}</h3>
+              <p>{similarProduct.name}</p>
               <p>₦{similarProduct.price.toFixed(2)}</p>
             </Link>
           ))}

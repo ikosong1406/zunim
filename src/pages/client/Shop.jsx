@@ -8,6 +8,16 @@ import "../../styles/client/Shop.css";
 import { FaFilter } from "react-icons/fa6";
 import { fetchProducts } from "../../components/ProductData";
 
+// Function to shuffle an array
+const shuffleArray = (array) => {
+  let shuffledArray = array.slice(); // Create a copy of the array
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Swap elements
+  }
+  return shuffledArray;
+};
+
 const Shop = () => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
@@ -23,8 +33,9 @@ const Shop = () => {
     const loadProducts = async () => {
       try {
         const data = await fetchProducts(); // Fetch data from backend
-        setProducts(data); // Store data in state
-        setFilteredProducts(data); // Set initial filtered products
+        const shuffledData = shuffleArray(data); // Shuffle products
+        setProducts(shuffledData); // Store shuffled data in state
+        setFilteredProducts(shuffledData); // Set initial filtered products
         setIsLoading(false);
       } catch (error) {
         setError("Failed to fetch products");
