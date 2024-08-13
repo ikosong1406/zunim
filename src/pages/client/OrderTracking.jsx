@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Colors from "../../components/Colors";
-import { FaShoppingBag } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import api from "../../Api/BackendApi";
 import "../../styles/client/OrderTracking.css"; // Make sure to create this CSS file

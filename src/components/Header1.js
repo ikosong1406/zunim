@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "../styles/client/Header1.css";
 import { NavLink } from "react-router-dom";
 import Colors from "../components/Colors";
@@ -10,17 +10,7 @@ import { FaTruckFast } from "react-icons/fa6";
 import { CartContext } from "./CartContext";
 
 const Header1 = ({ clicked, setClicked }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [profileModal, setProfile] = useState(false);
   const { cartItems } = useContext(CartContext);
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const Profile = () => {
-    setProfile(!profileModal);
-  };
 
   return (
     <div className="head1Div1">

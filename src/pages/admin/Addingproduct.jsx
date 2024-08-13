@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../styles/admin/AddingProduct.css";
 import Colors from "../../components/Colors";
 import { FaCamera } from "react-icons/fa";
@@ -29,7 +28,6 @@ const AddingProduct = () => {
 
   const [colorInput, setColorInput] = useState("");
   const [sizeInput, setSizeInput] = useState("");
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -140,11 +138,15 @@ const AddingProduct = () => {
     });
 
     try {
-      const response = await axios.post(`${api}/createProduct`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "https://zunimbackend.onrender.com/createProduct",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       toast.success("Product Added");
       resetForm();
     } catch (error) {

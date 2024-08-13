@@ -5,7 +5,6 @@ import "../../styles/client/Product.css";
 import { fetchProducts } from "../../components/ProductData"; // Adjust path if needed
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReactStars from "react-rating-stars-component";
 import ImageModal from "../../components/ImageModal";
 
 const Product = () => {
@@ -21,8 +20,6 @@ const Product = () => {
   const [quantity, setQuantity] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-  const [rating, setRating] = useState(5);
-  const [review, setReview] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalImage, setModalImage] = useState("");
 
@@ -125,21 +122,6 @@ const Product = () => {
         setQuantity(0);
       }
     }
-  };
-
-  const handleRatingChange = (nextValue) => {
-    setRating(nextValue);
-  };
-
-  const handleSubmitReview = () => {
-    if (review.trim() === "") {
-      toast.error("Please enter a review.");
-      return;
-    }
-    // Submit the review
-    toast.success("Review submitted!");
-    setReview("");
-    setRating(0);
   };
 
   const parseJSON = (jsonString, defaultValue) => {
@@ -263,27 +245,6 @@ const Product = () => {
             </div>
           )}
         </div>
-
-        {/* <div className="rating-section">
-          <h3>Rating: </h3>
-          <ReactStars
-            name="rate1"
-            starCount={5}
-            value={rating}
-            onStarClick={handleRatingChange}
-          />
-        </div>
-
-        <div className="review-section">
-          <textarea
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
-            placeholder="Write your review here..."
-          />
-          <button onClick={handleSubmitReview} className="submit-review-button">
-            Submit Review
-          </button>
-        </div> */}
       </div>
       <div className="sim">
         <h2>Similar Products</h2>

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { CiTrash } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Colors from "../../components/Colors";
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
